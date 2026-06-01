@@ -6,9 +6,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI, DropArea, EnemyView
+    - Default, TransparentFX, Ignore Raycast, Water, UI, DropArea, EnemyView, CardView
 - Active game object:
-  - Name: CardSystem
+  - Name: Panel
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

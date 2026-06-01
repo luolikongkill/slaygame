@@ -6,7 +6,7 @@ using UnityEngine;
 public class ManaSystem : Singleton<ManaSystem>
 {
     [SerializeField] private ManaUI manaUI;
-    private const int MAX_MANA = 3 ;
+    private const int MAX_MANA = 99 ;
     private int currentMana = MAX_MANA;
     public int TurnCounter = 0;
     void OnEnable()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -8,8 +9,36 @@ public class CombatantView : MonoBehaviour
 {
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private StatusEffectsUI statusEffectsUI;
+
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
+    private Dictionary<StatusEffectType, int> statusEffects = new Dictionary<StatusEffectType, int>();
+
+     public void UpdateStatusEffect(StatusEffectType statusEffectType, int stackCount)
+    {
+        if (stackCount == 0)
+        {
+            if (statusEffects.ContainsKey(statusEffectType))
+            {
+                statusEffects.Remove(statusEffectType);
+             }
+                statusEffectsUI.UpdateStatusEffectUI(statusEffectType, stackCount);
+                return;
+        }
+       else
+       {
+            if(!statusEffects.ContainsKey(statusEffectType))
+                {
+                    statusEffects.Add(statusEffectType, stackCount);
+                 }
+             else
+             {
+                statusEffects[statusEffectType] = stackCount;
+             }
+             statusEffectsUI.UpdateStatusEffectUI(statusEffectType, stackCount);
+        }
+    }
     protected void SetupBase(int health, Sprite image)
     {
         MaxHealth = CurrentHealth = health;
@@ -22,12 +51,65 @@ public class CombatantView : MonoBehaviour
     }
     public void Damage(int damageAmount)
     {
-        CurrentHealth -= damageAmount;
-        if (CurrentHealth < 0) 
+        int reaminingDamage = damageAmount;
+        int currentArmor = GetStatusEffectStacks(StatusEffectType.ARMOR);
+        if (currentArmor > 0)
         {
-            CurrentHealth = 0;
+            if(currentArmor >= reaminingDamage)
+            {
+                RemoveStatusEffect(StatusEffectType.ARMOR, reaminingDamage);
+                reaminingDamage = 0;
+            }
+            else
+            {
+                RemoveStatusEffect(StatusEffectType.ARMOR, currentArmor);
+                reaminingDamage -= currentArmor;
+            }
         }
+        if(reaminingDamage > 0)
+        {
+            CurrentHealth -= reaminingDamage;
+            if (CurrentHealth < 0) 
+            {
+                CurrentHealth = 0;
+            }
+        }
+        
         UpdateHealthText();
         transform.DOShakePosition(0.5f, 0.5f);
+    }
+    public void AddStatusEffect(StatusEffectType type, int stackCount)
+    {
+        if(statusEffects.ContainsKey(type))
+        {
+            statusEffects[type] += stackCount;
+        }
+        else
+        {
+            statusEffects.Add(type, stackCount);
+        }
+
+        statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
+    } 
+    public void RemoveStatusEffect(StatusEffectType type, int stackCount)
+    {
+        if(statusEffects.ContainsKey(type))
+        {
+            statusEffects[type] -= stackCount;
+            if (statusEffects[type] <= 0)
+            {
+                statusEffects.Remove(type);
+                
+            }
+            statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
+        }
+    }
+    public int GetStatusEffectStacks(StatusEffectType type)
+    {
+        if(statusEffects.ContainsKey(type))
+        {
+            return statusEffects[type];
+        }
+        else return 0;
     }
 }

@@ -21,5 +21,6 @@ public class EnemyBoardView : MonoBehaviour
         EnemyViews.Remove(enemyView);
         Destroy(enemyView.gameObject);
         Debug.Log(enemyView.name + "Enemy Removed");
+        ReWardSystem.Instance.ReWardSet(EnemySystem.Instance.Enemies.Count);
     }
 }

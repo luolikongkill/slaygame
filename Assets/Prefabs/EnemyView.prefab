@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 2561815490285144542}
   - component: {fileID: 2084833582767910945}
   - component: {fileID: 3802871679564429339}
-  - component: {fileID: 601462858759750874}
   m_Layer: 7
   m_Name: EnemyView
   m_TagString: Untagged
@@ -221,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthText: {fileID: 7834089358451433919}
   spriteRenderer: {fileID: 6701001849733323646}
+  statusEffectsUI: {fileID: 2307609197414742471}
   attackText: {fileID: 2111001329010862578}
 --- !u!65 &3802871679564429339
 BoxCollider:
@@ -243,21 +243,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &601462858759750874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5155423799696354295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26046eae42b1c0e40bd47e510fc2584d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthText: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  attackText: {fileID: 0}
 --- !u!1001 &8160740866091269566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -336,6 +321,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8549949611956611455, guid: 291e041dcff56b542a0f11544e4ae73e, type: 3}
   m_PrefabInstance: {fileID: 8160740866091269566}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2307609197414742471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5856509937080222841, guid: 291e041dcff56b542a0f11544e4ae73e, type: 3}
+  m_PrefabInstance: {fileID: 8160740866091269566}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdafc986789f55345a325d8f7a69cb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &6701001849733323646 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3296207463232382656, guid: 291e041dcff56b542a0f11544e4ae73e, type: 3}
