@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c50b7dfa98b6c458733d3647c15587, type: 3}
   m_Name: FIrestorm
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: Add 3 burn to all enemies
+  <Description>k__BackingField: Add 200 burn to all enemies
   <Mana>k__BackingField: 2
   <IMage>k__BackingField: {fileID: 21300000, guid: bf9b8b94d5f0ecd4c9c34e7af915b028, type: 3}
   <ManaualTargetEffect>k__BackingField:

@@ -14,6 +14,10 @@ public class ReWardSystem : Singleton<ReWardSystem>
     {
         ActionSystem.DetachPerformer<GetRewardGA>();
     }
+    void Start()
+    {
+        RewardScreen.SetActive(false);
+    }
     public void ReWardSet(int CurrentEnemyCount)
     {
         EnemyCount = CurrentEnemyCount;

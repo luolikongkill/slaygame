@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class CardSystem : Singleton<CardSystem>
 {
    [SerializeField] private HandView handView;
-   [SerializeField] private Transform drawPilePoint;
-   [SerializeField] private Transform discardPilePoint;
+   [SerializeField] private RectTransform drawPilePoint;
+   [SerializeField] private RectTransform discardPilePoint;
+   [SerializeField] public TMP_Text DrawText;
+   [SerializeField] public TMP_Text DiscardText;
    private readonly List<Card> drawPile= new ();
    private readonly List<Card> discardPile= new ();
    private readonly List<Card> hand= new ();
@@ -30,7 +33,11 @@ public class CardSystem : Singleton<CardSystem>
 
 
         }
-
+private void CardTextUpdate()
+    {
+        DrawText.text = ""+drawPile.Count;
+        DiscardText.text = ""+discardPile.Count;
+    }
         public void Setup(List<CardData> deckData)
     {
         foreach (var cardData in deckData)
@@ -38,6 +45,14 @@ public class CardSystem : Singleton<CardSystem>
             Card card = new (cardData);
             drawPile.Add(card);
         }
+    }
+    public void Reset()
+    {
+        drawPile.Clear();
+        discardPile.Clear();
+        hand.Clear();
+        DestroyCard(handView.cards);
+        Debug.Log("CardSystem has been reset.");
     }
     private IEnumerator DrawCardsPerformer(DrawCardsGA drawCardsGA)
     {
@@ -59,34 +74,22 @@ public class CardSystem : Singleton<CardSystem>
     private IEnumerator DiscardAllCardsPerformer(DiscardAllCardsGA discardAllCardsGA)
     {
          List<Card> currentHand = new List<Card>(hand);
-    Debug.Log("实际要处理的卡牌数量：" + currentHand.Count);
 
     foreach (var card in currentHand)
     {
-        Debug.Log("正在处理卡牌：" );
         discardPile.Add(card);
-        
+        CardTextUpdate();
         CardView cardView = handView.RemoveCard(card);
         Debug.Log("获取到的 cardView: " + (cardView != null ? cardView.name : "空！"));
         
         // 关键：加日志确认是否进入 DiscardCard
-        Debug.Log("准备调用 DiscardCard");
         yield return DiscardCard(cardView);
-        Debug.Log("DiscardCard 执行完毕！");
+        Debug.Log("DiscardCard 执行完毕！" + currentHand.Count);
     }
     
     hand.Clear();
     Debug.Log("丢弃完成");
-        // foreach (var card in hand)
-        // {
-        //     Debug.Log("正在处理卡牌：");
-        //     discardPile.Add(card);
-        //     CardView cardView = handView.RemoveCard(card);
-        //     Debug.Log("获取到的 cardView：" + (cardView != null ? cardView.name : "空！"));
-        //      yield return DiscardCard(cardView);
-        // }
-        // hand.Clear();
-        // Debug.Log("丢弃完成");
+
     }
 
     private IEnumerator PlayCardPerformer(PlayCardGA playCardGA)
@@ -107,6 +110,7 @@ public class CardSystem : Singleton<CardSystem>
         }
 
         discardPile.Add(card);
+        CardTextUpdate();
         foreach (var effectWrapper in playCardGA.Card.OtherEffects)
         {
             List<CombatantView> targets = effectWrapper.TargetMode.GetTargets();
@@ -128,6 +132,7 @@ public class CardSystem : Singleton<CardSystem>
         else
         {Card card = drawPile.Draw();
         hand.Add(card);
+        CardTextUpdate();
         CardView cardView = CardViewCreator.Instance.CreateCardView(card, drawPilePoint.position, drawPilePoint.rotation);
         yield return handView.AddCard(cardView);
         }
@@ -137,6 +142,7 @@ public class CardSystem : Singleton<CardSystem>
     {
         drawPile.AddRange(discardPile);
         discardPile.Clear();
+        CardTextUpdate();
         Debug.Log("牌堆已重新洗牌");
     }
     private IEnumerator DiscardCard(CardView cardView)
@@ -148,5 +154,20 @@ public class CardSystem : Singleton<CardSystem>
         yield return tween.WaitForCompletion();
         Destroy(cardView.gameObject);
         // Debug.Log("丢弃一张牌2");
+    }
+    private IEnumerator DestroyCard(CardView cardView)
+    {
+        Destroy(cardView.gameObject);
+        Debug.Log("销毁一张牌视图");
+        yield break;
+    }
+    private void DestroyCard(List<CardView> cardViews)
+    {
+        foreach (var cardView in cardViews)
+        {
+            Destroy(cardView.gameObject);
+        }
+        cardViews.Clear();
+        Debug.Log("销毁所有卡牌视图");
     }
 }

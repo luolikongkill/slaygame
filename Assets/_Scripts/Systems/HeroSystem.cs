@@ -19,6 +19,10 @@ public class HeroSystem : Singleton<HeroSystem>
     {
         HeroView.Setup(heroData);
     }
+    public void Reset()
+    {
+        
+    }
         private void EnemyTurnPreReaction(EnemyTurnGA enemyTurnGA)
     {
         DiscardAllCardsGA discardAllCardsGA = new DiscardAllCardsGA();

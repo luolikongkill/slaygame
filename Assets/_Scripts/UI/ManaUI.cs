@@ -11,11 +11,11 @@ public class ManaUI : MonoBehaviour
         mana.text = currentMana.ToString();
         Debug.Log("Mana UI Updated: " + currentMana);
     }
-    void Awake()
-    {
-        UpdateManaText(3);
-        Debug.Log("Mana UI Awake called");
-    }
+    // void Awake()
+    // {
+    //     UpdateManaText(3);
+    //     Debug.Log("Mana UI Awake called");
+    // }
 
 
 }

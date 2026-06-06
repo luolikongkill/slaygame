@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be10c008161b22b46b2a34aed31f288a, type: 3}
   m_Name: DefaultHero
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 21300000, guid: bd73554dc35886c4ba81779eecb33b1f, type: 3}
-  <Health>k__BackingField: 80
+  <Image>k__BackingField: {fileID: 21300000, guid: fabd21222273f7b4fbe260e0637acc0e, type: 3}
+  <Health>k__BackingField: 9999
+  <CurrentHealth>k__BackingField: 8374
   <Deck>k__BackingField:
-  - {fileID: 11400000, guid: ed65744b88064254cac775cf9af2b686, type: 2}
-  - {fileID: 11400000, guid: ed65744b88064254cac775cf9af2b686, type: 2}
-  - {fileID: 11400000, guid: ed65744b88064254cac775cf9af2b686, type: 2}
+  - {fileID: 11400000, guid: 9914b87f7a20b414c964e381bf76039c, type: 2}
+  - {fileID: 11400000, guid: 9914b87f7a20b414c964e381bf76039c, type: 2}
   - {fileID: 11400000, guid: 85a490ea8e5edb2469fd5aa69c96901b, type: 2}
-  - {fileID: 11400000, guid: ef64edb503229734488dd7fde4c0ceeb, type: 2}
+  <BattleDeck>k__BackingField:
+  - {fileID: 11400000, guid: 9914b87f7a20b414c964e381bf76039c, type: 2}
+  - {fileID: 11400000, guid: 9914b87f7a20b414c964e381bf76039c, type: 2}
+  - {fileID: 11400000, guid: 85a490ea8e5edb2469fd5aa69c96901b, type: 2}

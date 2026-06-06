@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Gpart-Start.unity
+    guid: 9b7118bdefb3c36449fb7a8ae009239d
+  - enabled: 0
+    path: Assets/Scenes/Gpart-Map.unity
+    guid: a392b4d3cea343f4c8c6416d7bb28272
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

@@ -22,6 +22,7 @@ public class Perk
     public void OnRemove()
     {
         condition.UnsubscribeCondition(Reaction);
+        Debug.Log("Perk removed: " );
     }
     private void Reaction(GameAction gameAction)
     {

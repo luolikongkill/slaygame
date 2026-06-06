@@ -6,6 +6,6 @@ public class HeroView : CombatantView
 {
     public void Setup(HeroData herodata)
     {
-        SetupBase(herodata.Health, herodata.Image);
+        SetupBase(herodata.CurrentHealth, herodata.Image);
     }
 }

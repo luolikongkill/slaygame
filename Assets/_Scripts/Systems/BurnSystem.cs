@@ -20,6 +20,7 @@ public class BurnSystem : MonoBehaviour
         target.Damage(applyBurnGA.BurnDamage);
         target.RemoveStatusEffect(StatusEffectType.BURN,1);
         yield return new WaitForSeconds(0.5f);
+
     }
         
        

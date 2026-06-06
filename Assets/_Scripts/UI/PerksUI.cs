@@ -5,7 +5,7 @@ using UnityEngine;
 public class PerksUI : MonoBehaviour
 {
     [SerializeField] private PerkUI perkUIPrefab;
-    private readonly List<PerkUI> perkUIs = new List<PerkUI>();
+    public readonly List<PerkUI> perkUIs = new List<PerkUI>();
     public void AddPerkUI(Perk perk)
     {
         PerkUI perkUI = Instantiate(perkUIPrefab, transform);
@@ -21,4 +21,20 @@ public class PerksUI : MonoBehaviour
             Destroy(perkUI.gameObject);
         }
     }
+    public void ClearAll()
+    {
+        int destroycount = 0;
+        for(int i = perkUIs.Count - 1; i >= 0; i--)
+        {
+            Destroy(perkUIs[i].gameObject);
+            destroycount++;
+        }
+        perkUIs.Clear();
+        Debug.Log("销毁了" + destroycount + "个PerkUI");
+    }
+
 }
+    
+
+
+

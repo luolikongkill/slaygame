@@ -47,7 +47,7 @@ public class CardView : MonoBehaviour
     void OnMouseDown()
     {
         if(!Interactions.Instance.PlayerCanInteract()) return;
-        Debug.Log("Mouse Down");
+        // Debug.Log("Mouse Down");
         if(Card.ManualTargetEffect != null)
         {
             OnMouseExit();
@@ -73,7 +73,7 @@ public class CardView : MonoBehaviour
     {
         if(!hasloggedDrag)
         {
-            Debug.Log("Mouse Dragging");
+            // Debug.Log("Mouse Dragging");
             hasloggedDrag = true;
         }
         if(!Interactions.Instance.PlayerCanInteract()) return;
@@ -87,10 +87,10 @@ public class CardView : MonoBehaviour
         hasloggedDrag = false;
         if(!Interactions.Instance.PlayerCanInteract()) return;
 
-        Debug.Log("Mouse Up");
+        // Debug.Log("Mouse Up");
         if(Card.ManualTargetEffect != null)
         {
-            EnemyView target= ManualTargetSystem.Instance.EndTargeting(MouseUtil.GetMousePositionInWorldSpace(-1));
+            EnemyView target= ManualTargetSystem.Instance.EndTargeting(MouseUtil.GetMousePositionInWorldSpace(0));
             if(target != null && ManaSystem.Instance.HasEnoughMana(Card.Mana))
             {
                 PlayCardGA playCardGA = new PlayCardGA(Card,target);
@@ -99,13 +99,21 @@ public class CardView : MonoBehaviour
             }
             else
             {
+                if(target == null)
+                {
+                    Debug.Log("invalid target");
+                }
+                else
+                {
+                    Debug.Log("no enough mana");
+                }
                 Debug.Log("no enough mana or invalid target");
             }
         }
         else
         {
             if(ManaSystem.Instance.HasEnoughMana(Card.Mana) &&
-            Physics.Raycast(transform.position,Vector3.forward,out RaycastHit hit,10f,dropLayer))
+            Physics.Raycast(transform.position,Vector3.forward,out RaycastHit hit,100f,dropLayer))
             {
                 PlayCardGA playCardGA = new PlayCardGA(Card);
                 ActionSystem.Instance.Perform(playCardGA);

@@ -28,6 +28,15 @@ public class EnemySystem : Singleton<EnemySystem>
             enemyBoardView.AddEnemy(enemyData);
         }
     }
+    public void Reset()
+    {
+        enemyBoardView.RemoveEnemy(enemyBoardView.EnemyViews);
+        enemyBoardView.EnemyViews.Clear();
+        if (enemyBoardView.EnemyViews.Count == 0)
+        {
+            Debug.Log("EnemySystem has been reset.");
+        }
+    }
     private IEnumerator EnemyTurnPerformer(EnemyTurnGA enemyTurnGA)
     {
         foreach (var enemy in enemyBoardView.EnemyViews)
@@ -59,8 +68,16 @@ public class EnemySystem : Singleton<EnemySystem>
     }
     private IEnumerator KillEnemoyPerformer(KillEnemyGA killEnemyGA)
     {
-        yield return enemyBoardView.RemoveEnemy(killEnemyGA.enemyView);
-        
+        yield return new WaitForSeconds(0.1f);
+        if(killEnemyGA.enemyView == null)
+        {
+            Debug.LogError("EnemyView is null in KillEnemoyPerformer");
+            yield break;
+        }
+        else
+        {
+            yield return enemyBoardView.RemoveEnemy(killEnemyGA.enemyView);
+        }
     }
 
 

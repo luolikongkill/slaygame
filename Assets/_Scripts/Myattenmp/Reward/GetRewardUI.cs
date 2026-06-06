@@ -13,11 +13,13 @@ public class GetRewardUI : MonoBehaviour
     private List<CardView> rewardCards = new ();
     private System.Action onSkip;
 
-    private void Awake()
+
+
+void Start()
     {
+rewardPanel.SetActive(false);
         skipButton.onClick.AddListener(OnSkipClicked);
     }
-
     // 打开奖励UI并生成卡牌
     public void ShowRewards(List<CardData> GeneratedCards, System.Action<CardData> onChosen, System.Action onSkipCallback)
     {

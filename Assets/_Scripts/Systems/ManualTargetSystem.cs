@@ -16,11 +16,14 @@ public class ManualTargetSystem : Singleton<ManualTargetSystem>
         arrowView.gameObject.SetActive(false);
         Debug.Log("End Targeting");
         if(Physics.Raycast(endPosition, Vector3.forward,
-         out RaycastHit hit, 10f, targetLayerMask)&& hit.collider != null
+         out RaycastHit hit, 100f, targetLayerMask)&& hit.collider != null
          && hit.transform.TryGetComponent<EnemyView>(out EnemyView enemyView))
         {
+            Debug.Log("Targeted enemy: " );
             return enemyView;
         }
+        Debug.DrawLine(endPosition, endPosition + Vector3.forward * 10f, Color.red, 2f);
+        Debug.Log("Raycast from " + endPosition + " did not hit a valid target.");
         return null;
     }
 }

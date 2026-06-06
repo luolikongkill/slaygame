@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CombatantView : MonoBehaviour
 {
-    [SerializeField] private TMP_Text healthText;
+    [SerializeField] public TMP_Text healthText;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private StatusEffectsUI statusEffectsUI;
 
@@ -76,7 +76,7 @@ public class CombatantView : MonoBehaviour
         }
         
         UpdateHealthText();
-        transform.DOShakePosition(0.5f, 0.5f);
+        if(CurrentHealth>0)transform.DOShakePosition(0.5f, 0.5f);
     }
     public void AddStatusEffect(StatusEffectType type, int stackCount)
     {

@@ -8,30 +8,35 @@ public class StatusEffectsUI : MonoBehaviour
    [SerializeField] private StatusEffectUI statusEffectUIPrefab;
    [SerializeField] private Sprite armorSprite, burnSprite;
    private Dictionary<StatusEffectType, StatusEffectUI> statusEffectUIs = new Dictionary<StatusEffectType, StatusEffectUI>();
+   private void Start()
+   {
+
+
+   }
    public void UpdateStatusEffectUI(StatusEffectType statusEffectType, int stackCount)
    {
-    Debug.Log($"🔄 更新状态效果UI: {statusEffectType} 堆叠数: {stackCount}");
-    if (!statusEffectUIs.ContainsKey(statusEffectType))
-    {
-    Debug.Log("===== statusEffectUIs 当前内容 =====");
-    Debug.Log("Count = " + statusEffectUIs.Count);
-    foreach (var kvp in statusEffectUIs)
-    {
-        Debug.Log("Key: " + kvp.Key + "   Value: " + kvp.Value);
-    }
-    Debug.Log("=====================================");
-        Debug.LogWarning($"⚠️ StatusEffectsUI 中没有找到 {statusEffectType} 对应的图标，跳过UI更新");
-    }
-        else
-        {
-            Debug.Log("===== statusEffectUIs 当前内容 =====");
-    Debug.Log("Count = " + statusEffectUIs.Count);
-    foreach (var kvp in statusEffectUIs)
-    {
-        Debug.Log("Key: " + kvp.Key + "   Value: " + kvp.Value);
-    }
-    Debug.Log("=====================================");
-        }
+    // Debug.Log($"🔄 更新状态效果UI: {statusEffectType} 堆叠数: {stackCount}");
+    // if (!statusEffectUIs.ContainsKey(statusEffectType))
+    // {
+    // Debug.Log("===== statusEffectUIs 当前内容 =====");
+    // Debug.Log("Count = " + statusEffectUIs.Count);
+    // foreach (var kvp in statusEffectUIs)
+    // {
+    //     Debug.Log("Key: " + kvp.Key + "   Value: " + kvp.Value);
+    // }
+    // Debug.Log("=====================================");
+    //     Debug.LogWarning($"⚠️ StatusEffectsUI 中没有找到 {statusEffectType} 对应的图标，跳过UI更新");
+    // }
+    //     else
+    //     {
+    //         Debug.Log("===== statusEffectUIs 当前内容 =====");
+    // Debug.Log("Count = " + statusEffectUIs.Count);
+    // foreach (var kvp in statusEffectUIs)
+    // {
+    //     Debug.Log("Key: " + kvp.Key + "   Value: " + kvp.Value);
+    // }
+    // Debug.Log("=====================================");
+    //     }
        if (stackCount == 0)
         {
             if (statusEffectUIs.ContainsKey(statusEffectType))
@@ -51,6 +56,7 @@ public class StatusEffectsUI : MonoBehaviour
                  }
              Sprite sprite = GetSpriteByType(statusEffectType);
              statusEffectUIs[statusEffectType].Set(sprite, stackCount);
+
         }
     }
 
