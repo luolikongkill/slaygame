@@ -1,7 +1,13 @@
 {
   "dependencies": {
     "com.elmortem.serializereferenceeditor": {
-      "version": "file:C:/Users/朱奕翰/Desktop/新建文件夹/serializereferenceeditor-1.2.0",
+      "version": "file:D:/unityforstudy/serializereferenceeditor-master/SerializeReferenceEditor/Assets/SREditor/Package",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.mackysoft.serializereference-extensions": {
+      "version": "file:D:/unityforstudy/Unity-SerializeReferenceExtensions-main/Assets/MackySoft/MackySoft.SerializeReferenceExtensions",
       "depth": 0,
       "source": "local",
       "dependencies": {}

@@ -1,4 +1,5 @@
 // StartView.cs
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class StartView : MonoBehaviour
     private void OnStartGame()
     {
         // 1. 初始化玩家数据
+        MatchSetupSystem.Instance.ReGame();
 
         // 2. 生成地图
         MapManager.Instance.GenerateFullMap();
@@ -36,10 +38,6 @@ public class StartView : MonoBehaviour
         // 场景一加载完，就自动显示地图
         if (mapView != null)
         {
-            // startUIPanel.SetActive(false);
-            // mapUIPanel.SetActive(true);
-            //2026.6.05尝试使用UIChangeSet组件，展示屏蔽激活切换面板
-
             mapView.ShowMap();
         }
 

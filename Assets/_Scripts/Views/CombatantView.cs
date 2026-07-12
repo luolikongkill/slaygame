@@ -12,7 +12,7 @@ public class CombatantView : MonoBehaviour
     [SerializeField] private StatusEffectsUI statusEffectsUI;
 
     public int MaxHealth { get; private set; }
-    public int CurrentHealth { get; private set; }
+    public int CurHealth { get; private set; }
     private Dictionary<StatusEffectType, int> statusEffects = new Dictionary<StatusEffectType, int>();
 
      public void UpdateStatusEffect(StatusEffectType statusEffectType, int stackCount)
@@ -41,13 +41,13 @@ public class CombatantView : MonoBehaviour
     }
     protected void SetupBase(int health, Sprite image)
     {
-        MaxHealth = CurrentHealth = health;
+        MaxHealth = CurHealth = health;
         spriteRenderer.sprite = image;
         UpdateHealthText();
     }
     private void UpdateHealthText()
     {
-        healthText.text = "HP:"+ CurrentHealth;
+        healthText.text = "HP:"+ CurHealth;
     }
     public void Damage(int damageAmount)
     {
@@ -68,15 +68,15 @@ public class CombatantView : MonoBehaviour
         }
         if(reaminingDamage > 0)
         {
-            CurrentHealth -= reaminingDamage;
-            if (CurrentHealth < 0) 
+            CurHealth -= reaminingDamage;
+            if (CurHealth < 0) 
             {
-                CurrentHealth = 0;
+                CurHealth = 0;
             }
         }
         
         UpdateHealthText();
-        if(CurrentHealth>0)transform.DOShakePosition(0.5f, 0.5f);
+        if(CurHealth>0)transform.DOShakePosition(0.5f, 0.5f);
     }
     public void AddStatusEffect(StatusEffectType type, int stackCount)
     {

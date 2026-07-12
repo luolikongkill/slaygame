@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEngine;
 public class ActionSystem : Singleton<ActionSystem>
 {
+private static readonly Dictionary<Delegate, Delegate> _wrapperMap = new Dictionary<Delegate, Delegate>();
     
     private List<GameAction> reactions =null;
     public bool IsPerforming { get; private set; } = false;
@@ -19,6 +22,11 @@ public class ActionSystem : Singleton<ActionSystem>
             OnPerformFinished?.Invoke();
         }));
         
+    }
+    public void Reset()
+    {
+        if(reactions!=null)
+        reactions.Clear();
     }
     public void AddReaction (GameAction gameAction)
     {
@@ -86,7 +94,9 @@ private IEnumerator PerformReactions()
 public static void SubscribeReaction<T>(Action<T> reaction, ReactionTiming timing) where T : GameAction
     {
         Dictionary<Type, List<Action<GameAction>>> subs = timing == ReactionTiming.PRE ? preSubs : postSubs;
-        void wrappedReaction(GameAction action) => reaction((T)action);
+        Action<GameAction> wrappedReaction=(GameAction action) => reaction((T)action);
+        _wrapperMap[reaction] = wrappedReaction;
+        // void wrappedReaction(GameAction action) => reaction((T)action);
 
         if (subs.ContainsKey(typeof(T)))
         {
@@ -105,13 +115,19 @@ public static void SubscribeReaction<T>(Action<T> reaction, ReactionTiming timin
         Dictionary<Type, List<Action<GameAction>>> subs = timing == ReactionTiming.PRE ? preSubs : postSubs;
         Type type = typeof(T);
 
-        if (subs.ContainsKey(type))
+        if (subs.ContainsKey(type)&&_wrapperMap.ContainsKey(reaction))
         {
-
-            void wrappedReaction(GameAction action) => reaction((T)action);
+            Action<GameAction> wrappedReaction = (Action<GameAction>)_wrapperMap[reaction];
+            // void wrappedReaction(GameAction action) => reaction((T)action);
             subs[type].Remove(wrappedReaction);
+            if (subs[type].Count == 0)
+            {
+                subs.Remove(type);
+            }
         }
     }
+
 }
+
 
 

@@ -26,7 +26,7 @@ public class DamageSystem : MonoBehaviour
             target.Damage(dealDamageGA.Amount);
             Instantiate(damageVFX, target.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);
-            if(target.CurrentHealth <= 0)
+            if(target.CurHealth <= 0)
             {
                 if(target is EnemyView enemyView)
                 {

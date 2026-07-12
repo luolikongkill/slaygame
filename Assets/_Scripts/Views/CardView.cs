@@ -1,29 +1,29 @@
 using TMPro;
 using UnityEngine;
 
-public class CardView : MonoBehaviour
+public class CardView : CardViewOfBase
 {
 
-    [SerializeField] private TMP_Text title;
-    [SerializeField] private TMP_Text description;
-    [SerializeField] private TMP_Text mana;
-    [SerializeField] private SpriteRenderer imageSR;
-    [SerializeField] private GameObject wrapper;
-    [SerializeField] private LayerMask dropLayer;
+    // [SerializeField] private TMP_Text title;
+    // [SerializeField] private TMP_Text description;
+    // [SerializeField] private TMP_Text mana;
+    // [SerializeField] private SpriteRenderer imageSR;//
+    [SerializeField] private GameObject wrapper;//悬浮包装
+    [SerializeField] private LayerMask dropLayer;//碰撞箱子
 
 
-    public Card Card {get; private set; }
+    // public Card Card {get; private set; }//
     private Vector3 dragStartPositon;
     private Quaternion dragStartRotation;
 
-    public void Setup(Card card)
-    {
-        Card = card;
-        title.text = card.Title;
-        description.text = card.Description;
-        mana.text = card.Mana.ToString();
-        imageSR.sprite = card.Image;
-    }
+    // public void Setup(Card card)//
+    // {
+    //     Card = card;
+    //     title.text = card.Title;
+    //     description.text = card.Description;
+    //     mana.text = card.Mana.ToString();
+    //     imageSR.sprite = card.Image;
+    // }
 
     public void OnMouseEnter()
     {

@@ -19,6 +19,10 @@ public class HeroSystem : Singleton<HeroSystem>
     {
         HeroView.Setup(heroData);
     }
+    public void Setupv1(int health, Sprite image)
+    {
+        HeroView.Setupv1(health, image);
+    }
     public void Reset()
     {
         

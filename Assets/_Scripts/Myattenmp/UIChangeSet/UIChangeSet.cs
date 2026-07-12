@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 // 封装每个界面的配置：界面本身 + 它的屏幕外位置
 [System.Serializable]
@@ -12,10 +13,9 @@ public class UIConfig
     public Vector3 offScreenPos;
 }
 
-public class UIChangeSet : MonoBehaviour
+public class UIChangeSet : Singleton<UIChangeSet>
 {
     // 单例，方便全局调用（可选，但是非常方便）
-    public static UIChangeSet Instance { get; private set; }
 
     [Header("所有要管理的UI界面")]
     [SerializeField] private List<UIConfig> allUIs = new List<UIConfig>();
@@ -26,26 +26,11 @@ public class UIChangeSet : MonoBehaviour
     // 记录当前正在显示的界面
     private RectTransform currentShowUI;
 
-    private void Awake()
-    {
-        // 单例初始化
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        // 初始化：游戏开始时，只显示第一个界面，其他都移到屏幕外
-        InitAllUIPositions();
-    }
 
     // 初始化所有界面的位置
-    private void InitAllUIPositions()
+    protected override void Awake()
     {
+        base.Awake();
         if (allUIs.Count == 0)
         {
             Debug.LogWarning("没有配置任何UI界面！");

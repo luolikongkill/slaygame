@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapView : MonoBehaviour
+public class MapView : Singleton<MapView>
 {
     [SerializeField] private Transform mapContainer;
     [SerializeField] private MapNodeUI nodePrefab; // 每层节点数量
@@ -10,6 +10,8 @@ public class MapView : MonoBehaviour
     [SerializeField] private float nodeSpacing = 100f;  // 节点之间的水平间距
 
     private List<MapNodeUI> spawnedNodes = new List<MapNodeUI>();
+    public MapNodeUI currentnodeUI;
+
 
     // 显示地图
     public void ShowMap()
@@ -71,23 +73,20 @@ public class MapView : MonoBehaviour
     // 点击节点
     private void OnNodeClicked(MapNodeUI nodeUI)
     {
+        currentnodeUI=nodeUI;//记录当前节点
         LayerNodeUpdate(nodeUI);
         //更新本层所有节点属性ui
 
         // 更新下一层可访问的节点
-        UpdateAccessibleNodes(nodeUI);
+        // UpdateAccessibleNodes(nodeUI);
 
         // 根据房间类型跳转
         EnterRoom(nodeUI.nodeData);
 
     }
-    private void OnAccessNode(MapNodeUI nodeUI)
-    {
-        UpdateAccessibleNodes(nodeUI);
-    }
 
     // 更新可访问节点，应该改为当前房间完成再更新，
-    private void UpdateAccessibleNodes(MapNodeUI nodeUI)
+    public void UpdateAccessibleNodes(MapNodeUI nodeUI)
     {
         Debug.Log($"更新可访问节点，当前节点：{nodeUI.nodeData.x}, {nodeUI.nodeData.y}, 可访问节点数: {nodeUI.nodeData.connections.Count}");
         // Debug.Log($"当前节点连接的下一层节点索引: {string.Join(", ", nodeUI.nodeData.connections)}");

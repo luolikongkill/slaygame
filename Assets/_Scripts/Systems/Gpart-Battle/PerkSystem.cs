@@ -29,7 +29,6 @@ public class PerkSystem : Singleton<PerkSystem>
     public void Reset()
     {
         ClearAllPerks();   
-        Debug.Log("PerkSystem has been reset.");
     }
     public void ClearAllPerks()
     {

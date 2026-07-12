@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c50b7dfa98b6c458733d3647c15587, type: 3}
   m_Name: Armor Up
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: Add 5 armor
+  <Title>k__BackingField: Armor Up
+  <Description>k__BackingField: Add 500 armor
   <Mana>k__BackingField: 1
   <IMage>k__BackingField: {fileID: 21300000, guid: 04a2f8b497a2dd04daff68846c61877a, type: 3}
   <ManaualTargetEffect>k__BackingField:
@@ -34,4 +35,4 @@ MonoBehaviour:
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
         statusEffectType: 0
-        stackCount: 5
+        stackCount: 500

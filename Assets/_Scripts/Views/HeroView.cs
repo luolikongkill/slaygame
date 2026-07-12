@@ -8,4 +8,8 @@ public class HeroView : CombatantView
     {
         SetupBase(herodata.CurrentHealth, herodata.Image);
     }
+    public void Setupv1(int health, Sprite image)
+    {
+        SetupBase(health, image);
+    }
 }

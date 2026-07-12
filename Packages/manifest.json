@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "com.elmortem.serializereferenceeditor": "file:C:/Users/朱奕翰/Desktop/新建文件夹/serializereferenceeditor-1.2.0",
+    "com.elmortem.serializereferenceeditor": "file:D:/unityforstudy/serializereferenceeditor-master/SerializeReferenceEditor/Assets/SREditor/Package",
+    "com.mackysoft.serializereference-extensions": "file:D:/unityforstudy/Unity-SerializeReferenceExtensions-main/Assets/MackySoft/MackySoft.SerializeReferenceExtensions",
     "com.unity.collab-proxy": "2.11.4",
     "com.unity.feature.2d": "2.0.1",
     "com.unity.feature.development": "1.0.1",

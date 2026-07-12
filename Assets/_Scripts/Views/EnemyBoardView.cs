@@ -23,6 +23,7 @@ public class EnemyBoardView : MonoBehaviour
         Destroy(enemyView.gameObject);
         Debug.Log(enemyView.name + "Enemy destroyed");
         // ReWardSystem.Instance.ReWardSet(EnemySystem.Instance.Enemies.Count);
+
     }
     public void RemoveEnemy(List<EnemyView> enemyViews)
     {

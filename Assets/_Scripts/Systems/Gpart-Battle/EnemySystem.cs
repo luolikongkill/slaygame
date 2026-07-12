@@ -77,6 +77,12 @@ public class EnemySystem : Singleton<EnemySystem>
         else
         {
             yield return enemyBoardView.RemoveEnemy(killEnemyGA.enemyView);
+            Debug.Log("killGA"+Enemies.Count);
+            if (Enemies.Count==0)
+            {   //敌人全部死亡创造游戏结束ga
+                GameEndGA gameEndGA = new GameEndGA (Enemies.Count);
+                ActionSystem.Instance.AddReaction(gameEndGA);
+            }
         }
     }
 

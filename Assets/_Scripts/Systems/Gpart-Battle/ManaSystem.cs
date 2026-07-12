@@ -21,6 +21,10 @@ public class ManaSystem : Singleton<ManaSystem>
         ActionSystem.DetachPerformer<RefillManaGA>();
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreReaction, ReactionTiming.POST);
     }
+    public void Reset()
+    {
+        currentMana = MAX_MANA;
+    }
     public bool HasEnoughMana(int mana)
     {
         return currentMana >= mana;
