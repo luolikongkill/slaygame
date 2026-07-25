@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class DamageSystem : MonoBehaviour
@@ -22,10 +23,6 @@ public class DamageSystem : MonoBehaviour
         }
         foreach (var target in dealDamageGA.Targets)
         {
-            // Debug.Log($"Dealing {dealDamageGA.Amount} damage to {target.name}");//当没有目标是否，这个打印会出bug
-            target.Damage(dealDamageGA.Amount);
-            Instantiate(damageVFX, target.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(0.2f);
             if(target.CurHealth <= 0)
             {
                 if(target is EnemyView enemyView)
@@ -33,10 +30,38 @@ public class DamageSystem : MonoBehaviour
                     KillEnemyGA killEnemyGA = new(enemyView);
                     ActionSystem.Instance.AddReaction(killEnemyGA);
                 }
-                else
+                else if(MatchSetupSystem.Instance.isPlayerDied == false)
                 {
-                    //any action
+                    MatchSetupSystem.Instance.isPlayerDied = true;
+                    UIChangeSet.Instance.UIChange(RoomType.Empty);
+                    Debug.Log("Player Died");
+                    break;
                 }
+                continue;
+            }
+            if (dealDamageGA.Targets == null)
+            {
+                Debug.LogWarning("DealDamageGA has no targets or is died.");
+                break;
+            }
+            target.Damage(dealDamageGA.Amount);
+            Instantiate(damageVFX, target.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.5f);
+            if(target.CurHealth <= 0)
+            {
+                if(target is EnemyView enemyView)
+                {
+                    KillEnemyGA killEnemyGA = new(enemyView);
+                    ActionSystem.Instance.AddReaction(killEnemyGA);
+                }
+                else if(MatchSetupSystem.Instance.isPlayerDied == false)
+                {
+                    MatchSetupSystem.Instance.isPlayerDied = true;
+                    UIChangeSet.Instance.UIChange(RoomType.Empty);
+                    Debug.Log("Player Died");
+                    break;
+                }
+
             }
         }
     }

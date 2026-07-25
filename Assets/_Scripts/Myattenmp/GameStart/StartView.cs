@@ -41,10 +41,16 @@ public class StartView : MonoBehaviour
             mapView.ShowMap();
         }
 
+        UIChangeSet.Instance.UIChange(1);
+
     }
+    
 
     private void OnContinueGame()
     {
+        if(MatchSetupSystem.Instance.isGameStarted)
+        return;
+        UIChangeSet.Instance.UIChange(1);
         // 后续实现存档加载
         Debug.Log("继续游戏（暂未实现）");
     }

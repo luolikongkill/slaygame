@@ -6,6 +6,6 @@ public class AllEnemiesTM : TargetMode
 {
     public override List<CombatantView> GetTargets()
     {
-        return new(EnemySystem.Instance.Enemies);
+        return new(EnemyPoolSystem.Instance.enemySystem.Enemies);
     }
 }

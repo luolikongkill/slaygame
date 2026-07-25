@@ -10,6 +10,7 @@ public class HeroData : ScriptableObject
     [field: SerializeField] public List<CardData> Deck { get;  set; }
     [field: SerializeField] public List<CardData> BattleDeck { get;  set; }
     [field: SerializeField] public  List<CardData> AllDeck { get; private set; }
+    [field: SerializeField] public List<PerkData> InitperkDatas{ get; private set; }
     public void Init(HeroData heroData)
     {
         Image = heroData.Image;
@@ -31,7 +32,6 @@ public class HeroData : ScriptableObject
         newHeroData.Image = this.Image;
         newHeroData.Health = this.Health;
         newHeroData.CurrentHealth = this.CurrentHealth;
-        Debug.Log("Health"+newHeroData.Health+"\nCurHealth"+newHeroData.CurrentHealth);
         Debug.Log("clone suc");
         return newHeroData;
     }

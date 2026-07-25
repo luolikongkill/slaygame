@@ -45,7 +45,7 @@ public class CombatantView : MonoBehaviour
         spriteRenderer.sprite = image;
         UpdateHealthText();
     }
-    private void UpdateHealthText()
+    public virtual void UpdateHealthText()
     {
         healthText.text = "HP:"+ CurHealth;
     }

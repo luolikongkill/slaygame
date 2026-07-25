@@ -11,5 +11,6 @@ public class DealDamageGA : GameAction , IHaveCaster
     {
         Amount = amount;
         Targets =new (targets);
+        Caster = caster;
     }
 }

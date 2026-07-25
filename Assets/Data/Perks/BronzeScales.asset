@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffff4d2d27d16d94e98b5de1c2d15382, type: 3}
   m_Name: BronzeScales
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 21300000, guid: 8a2941ba7b881c74581ee56abab54143, type: 3}
+  <Image>k__BackingField: {fileID: 21300000, guid: 04a2f8b497a2dd04daff68846c61877a, type: 3}
   <Condition>k__BackingField:
     rid: 9202364314017857548
   <AutoTargetEffects>k__BackingField:

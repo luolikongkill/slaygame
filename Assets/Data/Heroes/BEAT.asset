@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BEAT
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 21300000, guid: fabd21222273f7b4fbe260e0637acc0e, type: 3}
-  <Health>k__BackingField: 9999
-  <CurrentHealth>k__BackingField: 9999
+  <Health>k__BackingField: 1
+  <CurrentHealth>k__BackingField: 1
   <Deck>k__BackingField:
   - {fileID: 11400000, guid: 85a490ea8e5edb2469fd5aa69c96901b, type: 2}
   - {fileID: 11400000, guid: 85a490ea8e5edb2469fd5aa69c96901b, type: 2}
@@ -26,3 +26,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed65744b88064254cac775cf9af2b686, type: 2}
   - {fileID: 11400000, guid: ef64edb503229734488dd7fde4c0ceeb, type: 2}
   - {fileID: 11400000, guid: 01f03da6b3490374c8a9d8b32f7d0639, type: 2}
+  <InitperkDatas>k__BackingField:
+  - {fileID: 11400000, guid: ba51a7c4a4bbd4a4a88490b1a0c3be74, type: 2}

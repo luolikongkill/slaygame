@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 // 封装每个界面的配置：界面本身 + 它的屏幕外位置
 [System.Serializable]
@@ -23,8 +24,13 @@ public class UIChangeSet : Singleton<UIChangeSet>
     [Header("摄像机中心位置（显示位置）")]
     [SerializeField] private Vector3 centerPos = Vector3.zero;
 
+
+    public float waitanimtime;
+
     // 记录当前正在显示的界面
     private RectTransform currentShowUI;
+
+    [SerializeField]private FadeAnimManager fadeAnimManager;
 
 
     // 初始化所有界面的位置
@@ -54,7 +60,6 @@ public class UIChangeSet : Singleton<UIChangeSet>
     /// <param name="targetUI">要显示的UI面板</param>
     public void UIChange(RectTransform targetUI)
     {
-        // 容错处理：如果要显示的就是当前界面，直接返回
         if (targetUI == currentShowUI) return;
 
         // 容错处理：如果传进来的UI不在配置列表里，报错
@@ -87,12 +92,36 @@ public class UIChangeSet : Singleton<UIChangeSet>
     /// <param name="uiIndex">界面在列表里的索引（0是第一个）</param>
     public void UIChange(int uiIndex)
     {
+        fadeAnimManager.PlayAnim(2);
+
+        uichange(uiIndex);
+    }
+    public void UIChange(RoomType roomType)
+    {
+        if(roomType == RoomType.Boss)
+        fadeAnimManager.PlayAnim(2);
+        else fadeAnimManager.PlayAnim(0);
+        MatchSetupSystem.Instance.ReGame();
+
+        uichange(0);
+    }
+
+    public void uichange(int uiIndex)
+    {
         if (uiIndex < 0 || uiIndex >= allUIs.Count)
         {
             Debug.LogError($"UI索引 {uiIndex} 超出范围！");
             return;
         }
+        StartCoroutine(uichangeanim(uiIndex));
+        
+    }
 
+    private IEnumerator uichangeanim(int uiIndex)
+    {
+        yield return new WaitForSeconds(waitanimtime);
         UIChange(allUIs[uiIndex].panel);
+        yield return new WaitForSeconds(waitanimtime/2);
+        fadeAnimManager.Init();
     }
 }

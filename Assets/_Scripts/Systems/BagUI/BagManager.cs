@@ -1,15 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BagManager : Singleton<BagManager>
 {
     public GameObject BagPanel;
+    public Button BagExitButton;
+
     public bool bagActivated;
+    public Animator anim;
+    public float animtime;
+
     [SerializeField]private BagCardView BCardPrefab;
     public Transform BagCardContent;
+
     private List<BagCardView> BCardViews = new ();
     public List<CardData> Deck = new();
+
+    void Start()
+    {
+        BagExitButton.onClick.AddListener(ButtonBag);
+        anim = GetComponent<Animator>();
+    }
     public void Init(List<CardData> Deck)
     {
         Reset();
@@ -39,14 +52,12 @@ public class BagManager : Singleton<BagManager>
             if(Input.GetButtonDown("CardBag")&&!bagActivated)
             {
                 // Time.timeScale=0;
-                BagPanel.SetActive(true);
-                bagActivated = true;   
+                OpenBag();  
             }
             else if(Input.GetButtonDown("CardBag")&&bagActivated)
             {
                 // Time.timeScale=1;
-                BagPanel.SetActive(false);
-                bagActivated = false; 
+                CloseBag(); 
             }
         }
     public void BagAdd(CardData cdata)
@@ -64,4 +75,29 @@ public class BagManager : Singleton<BagManager>
             Init(Deck);
         }
     }
+
+    public void OpenBag()
+    {
+        anim.Play("OpenBag");
+        BagPanel.SetActive(true);
+        bagActivated = true; 
+    }
+    public void CloseBag()
+    {
+        anim.Play("CloseBag");
+ 
+    }
+    public void Closeanim()
+    {
+        BagPanel.SetActive(false);
+        bagActivated = false;
+    }
+    public void ButtonBag()
+    {
+        if(!bagActivated)
+            OpenBag();
+        else CloseBag();
+    }
+
+
 }

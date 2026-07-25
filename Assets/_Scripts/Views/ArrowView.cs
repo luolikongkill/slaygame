@@ -11,7 +11,7 @@ public class ArrowView : MonoBehaviour
     {
         Vector3 endPosition = MouseUtil.GetMousePositionInWorldSpace();
         Vector3 direction = -(startPoint - arrowHead.transform.position).normalized;
-        lineRenderer.SetPosition(1, endPosition-direction*0.5f);
+        lineRenderer.SetPosition(1, endPosition);
         arrowHead.transform.position = endPosition;
         arrowHead.transform.right = direction;
         

@@ -9,7 +9,7 @@ public class MapManager : Singleton<MapManager>
     [Header("地图配置")]
     public int totalLayers = 15;   // 总层数（杀戮尖塔是15层）
     public int nodesPerLayer = 4;  // 每层最多4个节点
-    public int bossLayerInterval = 5; // 每5层一个BOSS
+    public int bossLayerInterval = 5; // 每5层一个elite
 
     public List<MapLayer> mapLayers; // 生成好的完整地图
     public int currentLayer = 0;     // 当前所在层数
@@ -55,7 +55,7 @@ public class MapManager : Singleton<MapManager>
             node.isAccessible = (y == 0); // 第一层都可点击
 
             // 分配房间类型
-            if ((y + 1) % bossLayerInterval == 0)
+            if ((y + 1) % totalLayers == 0)
             {
                 node.roomType = RoomType.Boss; // BOSS层只有一个BOSS房间
                 nodeCount = 1; // BOSS层强制只有1个节点
@@ -67,12 +67,12 @@ public class MapManager : Singleton<MapManager>
             else
             {
                 // 随机分配：普通70%，精英15%，休息10%，事件5%，以后再分配这个功能
-                // float rand = Random.value;
-                // // if (rand < 0.7f) node.roomType = RoomType.Normal;
-                // // else if (rand < 0.85f) node.roomType = RoomType.Elite;
-                // // else if (rand < 0.95f) node.roomType = RoomType.Rest;
-                // // else node.roomType = RoomType.Event;
-                node.roomType = RoomType.Normal; // 先全部设置为普通战斗，后面再细分
+                float rand = Random.value;
+                if (rand < 0.7f) node.roomType = RoomType.Normal;
+                else  node.roomType = RoomType.Elite;
+                // else if (rand < 0.95f) node.roomType = RoomType.Rest;
+                // else node.roomType = RoomType.Event;
+                // node.roomType = RoomType.Normal; // 先全部设置为普通战斗，后面再细分
             }
 
             layer.nodes.Add(node);

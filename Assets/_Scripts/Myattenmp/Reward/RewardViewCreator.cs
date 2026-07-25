@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class RewardViewCreator : Singleton<RewardViewCreator>
+public class RewardViewCreator : MonoBehaviour
 {
-    [SerializeField] private GameObject rewardPanel;
     [SerializeField] private Transform cardContainer;
     [SerializeField] private RewardCardView RCardPrefab;
     // [SerializeField] private Button skipButton;
@@ -13,24 +12,18 @@ public class RewardViewCreator : Singleton<RewardViewCreator>
     private List<CardData> rewardCards = new ();
     private List<RewardCardView> RCardViews = new ();
     private CardData Chosencarddata;
-    private List<CardData> RCardpool;
+    public List<CardData> RCardpool;
 
 
-
-    // private void Awake()
-    // {
-    //     skipButton.onClick.AddListener(OnSkipClicked);
-    // }
     public void Reset()
     {
-        rewardPanel.SetActive(false);
         ClearView();
     }
     public void Init(List<CardData> CardDatas)
     {
         this.RCardpool = CardDatas;
     }
-    public void Setup()
+    public void Setup(int count)
     {
         ClearView();
         GetRewardIn AllReward = new ();
@@ -39,16 +32,11 @@ public class RewardViewCreator : Singleton<RewardViewCreator>
         ShowRewards();
     }
 
-    private void AddDeck()
-    {
-        MatchSetupSystem.Instance.CurrentHeroData.Deck.Add(Chosencarddata);
-    }
     // 打开奖励UI并生成卡牌
     public void ShowRewards()
     {
         // 先清空之前生成的卡牌
         // 实例化3张奖励卡
-        rewardPanel.SetActive(true);
         foreach (var carddata in rewardCards)
         {
             RewardCardView cardview = Instantiate(RCardPrefab, cardContainer);
@@ -58,28 +46,12 @@ public class RewardViewCreator : Singleton<RewardViewCreator>
             RCardViews.Add(cardview);
         }
         Debug.Log("ShowRewards");
-
-        // rewardPanel.SetActive(true);
     }
 
-    // 玩家选了一张卡,加入卡组
 
-
-    // 玩家点击跳过
-    private void OnSkipClicked()
-    {
-        // onSkip?.Invoke();
-        CloseUI();
-    }
-
-    // 关闭UI并清理
-    private void CloseUI()
-    {
-        rewardPanel.SetActive(false);
-    }
     public void ClearView()
     {
-        CloseUI();
+
         if (RCardViews!=null)
         foreach (var view in RCardViews)
         {

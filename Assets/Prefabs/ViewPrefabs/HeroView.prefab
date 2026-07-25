@@ -48,6 +48,7 @@ MonoBehaviour:
   healthText: {fileID: 2585647834244832478}
   spriteRenderer: {fileID: 1415513947709548063}
   statusEffectsUI: {fileID: 8024307967632721062}
+  Hpslider: {fileID: 0}
 --- !u!1001 &4475048981724102879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,6 +57,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6502829811099992611}
     m_Modifications:
+    - target: {fileID: 748759399565830807, guid: 291e041dcff56b542a0f11544e4ae73e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1876692472176153777, guid: 291e041dcff56b542a0f11544e4ae73e, type: 3}
       propertyPath: m_Name
       value: CombatantViewBase
@@ -121,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5241368122388785568 stripped
-Transform:
+--- !u!224 &5241368122388785568 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 8549949611956611455, guid: 291e041dcff56b542a0f11544e4ae73e, type: 3}
   m_PrefabInstance: {fileID: 4475048981724102879}
   m_PrefabAsset: {fileID: 0}

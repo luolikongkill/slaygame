@@ -88,6 +88,12 @@ public class MapView : Singleton<MapView>
     // 更新可访问节点，应该改为当前房间完成再更新，
     public void UpdateAccessibleNodes(MapNodeUI nodeUI)
     {
+        if(nodeUI.nodeData.roomType == RoomType.Boss)
+        {
+            Debug.Log("BossRoomExit");
+            UIChangeSet.Instance.UIChange(0);
+            return;
+        }
         Debug.Log($"更新可访问节点，当前节点：{nodeUI.nodeData.x}, {nodeUI.nodeData.y}, 可访问节点数: {nodeUI.nodeData.connections.Count}");
         // Debug.Log($"当前节点连接的下一层节点索引: {string.Join(", ", nodeUI.nodeData.connections)}");
         MapLayer nextLayer = MapManager.Instance.mapLayers[nodeUI.nodeData.y + 1];
@@ -107,7 +113,7 @@ public class MapView : Singleton<MapView>
             case RoomType.Elite:
             case RoomType.Boss:
                 // 跳转到战斗场景，传入敌人配置
-                MatchSetupSystem.Instance.GameStart();
+                MatchSetupSystem.Instance.GameStart(node.roomType);
                 //**地图系统通信战斗系统，连接还没做，
                 //此处传送房间类型，战斗系统根据房间类型生成对应的敌人，但是怪池子还没做，先不填房间type
                 break;

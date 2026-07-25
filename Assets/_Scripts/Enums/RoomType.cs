@@ -8,5 +8,6 @@ public enum RoomType
     Rest,       // 休息点
     Shop,       // 商店
     Event,      // 随机事件
-    Treasure    // 宝箱
+    Treasure,    // 宝箱
+    LastBoss
 }

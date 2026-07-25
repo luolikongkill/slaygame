@@ -9,7 +9,7 @@ public class KillEnemyGA : GameAction
     {
         if(enemyView == null)
         {
-            Debug.LogError("EnemyView is null in KillEnemyGA");
+            Debug.LogWarning("EnemyView is null in KillEnemyGA");
             return;
         }
         this.enemyView = enemyView;

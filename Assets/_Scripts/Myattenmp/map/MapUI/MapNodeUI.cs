@@ -14,6 +14,8 @@ public class MapNodeUI : MonoBehaviour
     public RoomNode nodeData;// 当前节点数据
     private System.Action<MapNodeUI> onNodeClicked;// 点击回调
 
+    
+
     // 不同房间类型的图标（在Inspector赋值）
     [SerializeField] public Sprite normalSprite;
     // [SerializeField] private Sprite eliteSprite;

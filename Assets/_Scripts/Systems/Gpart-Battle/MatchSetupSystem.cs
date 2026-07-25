@@ -8,13 +8,11 @@ using UnityEngine;
 public class MatchSetupSystem : Singleton<MatchSetupSystem>
 {
     [SerializeField] public HeroData heroData;
-    [SerializeField] public List<EnemyData> enemyDatas;
-    [SerializeField] public List<PerkData> perkDatas;
     public   HeroData  CurrentHeroData ;
-    // public   HeroData  CurrentHeroData2 ;
-    private bool isGameStarted = false;
+    public bool isGameStarted = false;
+    public bool isPlayerDied = false;
 
-    public void GameStart()
+    public void GameStart(RoomType roomType)
     {
         if(!isGameStarted)
         {
@@ -25,12 +23,16 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         GameAfterInit();
         GameReset();
         
-        ReWardSystem.Instance.Setup(CurrentHeroData.Deck);
+
+
+        ReWardSystem.Instance.Setup(CurrentHeroData.AllDeck);
+
         HeroSystem.Instance.Setup(CurrentHeroData);//
-        EnemySystem.Instance.Setup(enemyDatas);//1
+        EnemyPoolSystem.Instance.Setup(roomType);
+
         CardSystem.Instance.Setup(CurrentHeroData.BattleDeck);//1
-        PerkSystem.Instance.Setup(perkDatas);//
         DrawCardsGA drawCardsGA = new (5);
+        
         ActionSystem.Instance.Perform(drawCardsGA);
 
     }
@@ -38,13 +40,11 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
     public void GameReset()
     {
 
-        //  HeroSystem.Instance.Reset();直接在本地数据传入新数据，HeroData会自己更新，不需要重置
-        // ActionSystem.Instance.Reset();
+
         ReWardSystem.Instance.Reset();
         Debug.Log("ActionClear");
-        EnemySystem.Instance.Reset();
+        EnemyPoolSystem.Instance.enemySystem.Reset();
         CardSystem.Instance.Reset();
-        PerkSystem.Instance.Reset();
         ManaSystem.Instance.Reset();
         //cleanup
     }
@@ -60,14 +60,16 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
     //开局游戏角色初始化
     public void ReGame()
     {
-        // CurrentHeroData2 = new ();
-        // CurrentHeroData2 = heroData;
-        // // CurrentHeroData2 = new ();
-        // // CurrentHeroData2.Init(heroData);
         CurrentHeroData = heroData.GetClone();
         CurrentHeroData.BattleDeck = CurrentHeroData.Deck;
         Debug.Log("ReGame sucess");
         isGameStarted = false;
         BagManager.Instance.Init(CurrentHeroData.Deck);
+        PerkSystem.Instance.Init(CurrentHeroData.InitperkDatas);
+    }
+
+    public void GameOver()
+    {
+        
     }
 }

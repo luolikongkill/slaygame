@@ -13,8 +13,9 @@ public class RewardCardView : CardViewOfBase
     private void OnMouseUp()
     {
         MatchSetupSystem.Instance.CurrentHeroData.DeckAdd(base.Card.data);
-        RewardViewCreator.Instance.ClearView();
+        GetRewardUI.Instance.rewardViewCreator.ClearView();
 
+        GetRewardUI.Instance.OpenUI();
     } 
 
 }
