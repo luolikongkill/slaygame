@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Sliverwoof
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 21300000, guid: 1bc6ef8719ba99f4494466907af0801c, type: 3}
-  <Health>k__BackingField: 999
+  <Health>k__BackingField: 9999
   <AttackPower>k__BackingField: 999
+  enemyActions:
+  - type: 0
+    count: 999
+    target: {fileID: 0}
+  - type: 4
+    count: 999
+    target: {fileID: 0}
   enemyType: 3

@@ -16,6 +16,10 @@ public class GetRewardUI : Singleton<GetRewardUI>
     {
         CloseUI();
         rewardViewCreator.RCardpool = CardDatas;
+        foreach(Button button in rewardButton)
+        {
+            button.onClick.RemoveAllListeners();
+        }
     }
 
     void Start()

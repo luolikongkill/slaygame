@@ -68,10 +68,10 @@ public class MapManager : Singleton<MapManager>
             {
                 // 随机分配：普通70%，精英15%，休息10%，事件5%，以后再分配这个功能
                 float rand = Random.value;
-                if (rand < 0.7f) node.roomType = RoomType.Normal;
-                else  node.roomType = RoomType.Elite;
+                if (rand < 0.5f) node.roomType = RoomType.Normal;
+                else if(rand < 0.6f)  node.roomType = RoomType.Elite;
                 // else if (rand < 0.95f) node.roomType = RoomType.Rest;
-                // else node.roomType = RoomType.Event;
+                else node.roomType = RoomType.Event;
                 // node.roomType = RoomType.Normal; // 先全部设置为普通战斗，后面再细分
             }
 

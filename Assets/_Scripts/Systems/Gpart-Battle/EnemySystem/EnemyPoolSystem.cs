@@ -5,11 +5,15 @@ using UnityEngine;
 public class EnemyPoolSystem : Singleton<EnemyPoolSystem>
 {
     public EnemySystem  enemySystem;
+    public NodeEventManager eventmanager;
 
     [SerializeField]public LayerOfEnemy NormalEnemy;
-
     [SerializeField]public LayerOfEnemy  EliteEnemy;
     [SerializeField]public LayerOfEnemy  BossEnemy;
+
+
+    [SerializeField]public EventData[] eventDatas;
+
 
     public void Setup(RoomType roomType)
     {
@@ -24,8 +28,13 @@ public class EnemyPoolSystem : Singleton<EnemyPoolSystem>
             case RoomType.Boss:
                 enemySystem.Setup(BossEnemy.enemyGroup[0].enemydatas,roomType);
                 break;
+
+            case RoomType.Event:
+                eventmanager.Setup(eventDatas[0]);
+                break;
             default:
-                Debug.Log("WarnOfUnknowroomType" + roomType);
+                enemySystem.Setup(BossEnemy.enemyGroup[0].enemydatas,roomType);
+                Debug.Log("WarnOfUnknowroomType, Setup bossroom" + roomType);
                  break; 
         }
         ;

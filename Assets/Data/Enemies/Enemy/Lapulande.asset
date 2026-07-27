@@ -15,4 +15,14 @@ MonoBehaviour:
   <Image>k__BackingField: {fileID: 21300000, guid: 2235a4f0ec4d62845961a3f7272ba5b5, type: 3}
   <Health>k__BackingField: 799
   <AttackPower>k__BackingField: 325
+  enemyActions:
+  - type: 0
+    count: 325
+    target: {fileID: 0}
+  - type: 2
+    count: 325
+    target: {fileID: 0}
+  - type: 0
+    count: 325
+    target: {fileID: 0}
   enemyType: 2

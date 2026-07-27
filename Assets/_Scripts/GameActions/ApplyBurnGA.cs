@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
 public class ApplyBurnGA : GameAction
 {
     public int BurnDamage { get; private set; }

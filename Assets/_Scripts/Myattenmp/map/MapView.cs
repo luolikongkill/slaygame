@@ -35,10 +35,19 @@ public class MapView : Singleton<MapView>
                     0
                 );
 
+                    
+
                 // 实例化节点
 
                 MapNodeUI nodeUI = Instantiate(nodePrefab, mapContainer);
-                nodeUI.transform.localPosition = position;
+                if(node.roomType == RoomType.Boss)
+                {
+                    position = new Vector3(1500,0,0);
+                    nodeUI.transform.localPosition = position;
+                    nodeUI.transform.localScale = new Vector3(1, 1,1);
+
+                }
+                else nodeUI.transform.localPosition = position;
                 nodeUI.NodeInit(node, OnNodeClicked);//**初始化节点UI，传入节点数据和点击回调*/
                 spawnedNodes.Add(nodeUI);
                 // Debug.Log("地图节点生成中");
@@ -112,6 +121,7 @@ public class MapView : Singleton<MapView>
             case RoomType.Normal:
             case RoomType.Elite:
             case RoomType.Boss:
+            case RoomType.Event:
                 // 跳转到战斗场景，传入敌人配置
                 MatchSetupSystem.Instance.GameStart(node.roomType);
                 //**地图系统通信战斗系统，连接还没做，

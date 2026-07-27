@@ -46,6 +46,7 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         EnemyPoolSystem.Instance.enemySystem.Reset();
         CardSystem.Instance.Reset();
         ManaSystem.Instance.Reset();
+        HeroSystem.Instance.Reset();
         //cleanup
     }
     //游戏角色更新
@@ -56,6 +57,8 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         Debug.Log("战斗卡牌添加完成");
         if(isGameStarted)
         CurrentHeroData.CurrentHealth = HeroSystem.Instance.HeroView.CurHealth;
+        if(CurrentHeroData.CurrentHealth == 0)
+            CardSystem.Instance.Reset();
     }
     //开局游戏角色初始化
     public void ReGame()
@@ -64,8 +67,11 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         CurrentHeroData.BattleDeck = CurrentHeroData.Deck;
         Debug.Log("ReGame sucess");
         isGameStarted = false;
+        Interactions.Instance.GameIsOver = false;
         BagManager.Instance.Init(CurrentHeroData.Deck);
         PerkSystem.Instance.Init(CurrentHeroData.InitperkDatas);
+        HeroSystem.Instance.Setup(CurrentHeroData);
+
     }
 
     public void GameOver()

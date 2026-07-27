@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Red Slime
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 21300000, guid: 281abd904e70bdd4d91a2409496f50ee, type: 3}
-  <Health>k__BackingField: 40
-  <AttackPower>k__BackingField: 7
+  <Health>k__BackingField: 325
+  <AttackPower>k__BackingField: 80
+  enemyActions:
+  - type: 0
+    count: 80
+    target: {fileID: 0}
+  - type: 2
+    count: 100
+    target: {fileID: 0}
   enemyType: 1

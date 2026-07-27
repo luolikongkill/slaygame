@@ -18,26 +18,26 @@ public class MapNodeUI : MonoBehaviour
 
     // 不同房间类型的图标（在Inspector赋值）
     [SerializeField] public Sprite normalSprite;
-    // [SerializeField] private Sprite eliteSprite;
-    // [SerializeField] private Sprite bossSprite;
-    // [SerializeField] private Sprite restSprite;
-    // [SerializeField] private Sprite eventSprite;
+    [SerializeField] private Sprite eliteSprite;
+    [SerializeField] private Sprite bossSprite;
+    [SerializeField] private Sprite restSprite;
+    [SerializeField] private Sprite eventSprite;
 
     public void NodeInit(RoomNode data, System.Action<MapNodeUI> callback)
     {
         nodeData = data;
         onNodeClicked = callback;
 
-        // 设置图标
-        // nodeImage.sprite = data.roomType switch
-        // {
-        //     RoomType.Normal => normalSprite,
-        //     // RoomType.Elite => eliteSprite,
-        //     // RoomType.Boss => bossSprite,
-        //     // RoomType.Rest => restSprite,
-        //     // RoomType.Event => eventSprite,
-        //     _ => normalSprite
-        // };
+        nodeImage.sprite = data.roomType switch
+        {
+            RoomType.Normal => normalSprite,
+            RoomType.Elite => eliteSprite,
+            RoomType.Boss => bossSprite,
+            // RoomType.Rest => restSprite,
+            RoomType.Event => eventSprite,
+            _ => normalSprite
+        };
+        visitedindicator.sprite = nodeImage.sprite;
 
         // 设置状态
         visitedindicator.enabled = data.isVisited;
@@ -48,7 +48,7 @@ public class MapNodeUI : MonoBehaviour
         Nodebutton.onClick.RemoveAllListeners();
 
         Nodebutton.onClick.AddListener(OnClick);
-        //Debug.Log($"节点UI设置完成：{data.x}, {data.y}，房间类型：{data.roomType}");
+        Debug.Log($"节点UI设置完成：{data.x}, {data.y}，房间类型：{data.roomType}");
     }
 
     private void OnClick()

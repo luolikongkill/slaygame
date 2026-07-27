@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba854c34456ebdf4393643ce370c2163, type: 3}
+  m_Name: amiyaGreeting
+  m_EditorClassIdentifier: 
+  backgroundimage: {fileID: 21300000, guid: abdc3622d3c807a4cb0c2160095e4918, type: 3}
+  eventName: amiyaEncount
+  eventID: 1_1_1
+  optionGroups:
+  - {fileID: 11400000, guid: 223895a04310cdf4aa88c971b252213f, type: 2}
+  - {fileID: 11400000, guid: 9777159399887c349bb8a60e218288c6, type: 2}
+  hasnextevent: 1
+  nextevent: {fileID: 11400000, guid: c6e9587ef2346b04a89694ead7faefd6, type: 2}
+  eventtext: Hello!Beta tan. Are you remeberd me?

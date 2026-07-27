@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04f22b8f308593b4b8e4a17083b823aa, type: 3}
-  m_Name: Slime
+  m_Script: {fileID: 11500000, guid: 05ed874c4e82b6c4e8069ee94864a5ec, type: 3}
+  m_Name: bless
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 21300000, guid: 49ede3dd18da4bd40812cedffeb350e2, type: 3}
-  <Health>k__BackingField: 17
-  <AttackPower>k__BackingField: 5
-  enemyType: 1
+  eventOptions:
+  - {fileID: 11400000, guid: e321ab3941992784d9956dc87bff961a, type: 2}
+  isHaveReward: 0
+  optionReward:
+    optionindex: 0
+    rewardtype: 

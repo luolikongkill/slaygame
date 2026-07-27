@@ -7,6 +7,7 @@ using DG.Tweening;
 public class EnemySystem : MonoBehaviour
 {
     [SerializeField] private EnemyBoardView enemyBoardView;
+
     public List<EnemyView> Enemies => enemyBoardView.EnemyViews;
     private RoomType curRoomType;
 
@@ -42,6 +43,12 @@ public class EnemySystem : MonoBehaviour
             Debug.Log("EnemySystem has been reset.");
         }
     }
+
+    public void RefreshEnemyIntention()
+    {
+        foreach (var enemy in enemyBoardView.EnemyViews)
+            enemy.UpdateEnemyIntention();
+    }
     private IEnumerator EnemyTurnPerformer(EnemyTurnGA enemyTurnGA)
     {
         foreach (var enemy in enemyBoardView.EnemyViews)
@@ -51,11 +58,12 @@ public class EnemySystem : MonoBehaviour
                 {
                     ApplyBurnGA applyBurnGA = new (burnStacks, enemy);
                     ActionSystem.Instance.AddReaction(applyBurnGA);
-                }
-            if(MatchSetupSystem.Instance.isPlayerDied)
+                }//damageystem extension
+            if(MatchSetupSystem.Instance.isPlayerDied||Interactions.Instance.GameIsOver)
                 break;
-            AttackHeroGA attackHeroGA = new AttackHeroGA(enemy, enemy);
-            ActionSystem.Instance.AddReaction(attackHeroGA);
+            
+            ActionSystem.Instance.AddReaction(enemy.PlayEnemyAction());
+
         }
         yield return null;
     

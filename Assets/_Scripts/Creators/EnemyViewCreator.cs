@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyViewCreator : Singleton<EnemyViewCreator>
+public class EnemyViewCreator : MonoBehaviour
 {
     [SerializeField] private EnemyView enemyViewPrefab;
     public EnemyView CreateEnemyView(EnemyData enemyData, Vector3 position, Quaternion rotation)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class AddStatusEffectGA : GameAction
 {
     public StatusEffectType StatusEffectType { get; private set; }
@@ -13,4 +14,12 @@ public class AddStatusEffectGA : GameAction
         StackCount = stackCount;
         Targets = targets;
     }
+    public AddStatusEffectGA(StatusEffectType statusEffectType, int stackCount, params CombatantView[] target)
+    {
+        StatusEffectType = statusEffectType;
+        StackCount = stackCount;
+        List<CombatantView> targets = new List<CombatantView>(target);
+        Targets = targets;
+    }
 }
+ 

@@ -18,6 +18,11 @@ public class CardSystem : Singleton<CardSystem>
    private readonly List<Card> discardPile= new ();
    private readonly List<Card> hand= new ();
 
+
+   [SerializeField] private CardViewCreator cardViewCreator;
+   [SerializeField] public ManualTargetSystem manualTargetSystem;
+   [SerializeField] public CardViewHoverSystem cardViewHoverSystem;
+
     void OnEnable()
     {
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
@@ -38,7 +43,7 @@ private void CardTextUpdate()
         DrawText.text = ""+drawPile.Count;
         DiscardText.text = ""+discardPile.Count;
     }
-        public void Setup(List<CardData> deckData)
+    public void Setup(List<CardData> deckData)
     {
         foreach (var cardData in deckData)
         {
@@ -133,7 +138,7 @@ private void CardTextUpdate()
         {Card card = drawPile.Draw();
         hand.Add(card);
         CardTextUpdate();
-        CardView cardView = CardViewCreator.Instance.CreateCardView(card, drawPilePoint.position, drawPilePoint.rotation);
+        CardView cardView = cardViewCreator.CreateCardView(card, drawPilePoint.position, drawPilePoint.rotation);
         yield return handView.AddCard(cardView);
         }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class CardViewCreator :  Singleton<CardViewCreator>
+public class CardViewCreator :  MonoBehaviour
 {
     [SerializeField] private RectTransform handCardParent;//handview的父物体
     [SerializeField] private CardView cardViewPrefabs;

@@ -15,40 +15,19 @@ public class CombatantView : MonoBehaviour
     public int CurHealth { get; private set; }
     private Dictionary<StatusEffectType, int> statusEffects = new Dictionary<StatusEffectType, int>();
 
-     public void UpdateStatusEffect(StatusEffectType statusEffectType, int stackCount)
-    {
-        if (stackCount == 0)
-        {
-            if (statusEffects.ContainsKey(statusEffectType))
-            {
-                statusEffects.Remove(statusEffectType);
-             }
-                statusEffectsUI.UpdateStatusEffectUI(statusEffectType, stackCount);
-                return;
-        }
-       else
-       {
-            if(!statusEffects.ContainsKey(statusEffectType))
-                {
-                    statusEffects.Add(statusEffectType, stackCount);
-                 }
-             else
-             {
-                statusEffects[statusEffectType] = stackCount;
-             }
-             statusEffectsUI.UpdateStatusEffectUI(statusEffectType, stackCount);
-        }
-    }
+
     protected void SetupBase(int health, Sprite image)
     {
         MaxHealth = CurHealth = health;
         spriteRenderer.sprite = image;
         UpdateHealthText();
     }
+
     public virtual void UpdateHealthText()
     {
         healthText.text = "HP:"+ CurHealth;
     }
+
     public void Damage(int damageAmount)
     {
         int reaminingDamage = damageAmount;
@@ -78,6 +57,33 @@ public class CombatantView : MonoBehaviour
         UpdateHealthText();
         if(CurHealth>0)transform.DOShakePosition(0.5f, 0.5f);
     }
+     public void UpdateStatusEffect(StatusEffectType statusEffectType, int stackCount)
+    {
+        if (stackCount == 0)
+        {
+            if (statusEffects.ContainsKey(statusEffectType))
+            {
+                statusEffects.Remove(statusEffectType);
+             }
+                statusEffectsUI.UpdateStatusEffectUI(statusEffectType, stackCount);
+                return;
+        }
+       else
+       {
+            if(!statusEffects.ContainsKey(statusEffectType))
+                {
+                    statusEffects.Add(statusEffectType, stackCount);
+                 }
+             else
+             {
+                statusEffects[statusEffectType] = stackCount;
+             }
+             statusEffectsUI.UpdateStatusEffectUI(statusEffectType, stackCount);
+        }
+    }
+
+
+
     public void AddStatusEffect(StatusEffectType type, int stackCount)
     {
         if(statusEffects.ContainsKey(type))
@@ -111,5 +117,15 @@ public class CombatantView : MonoBehaviour
             return statusEffects[type];
         }
         else return 0;
+    }
+    public void ReSetStatusEffectUI()
+    {
+        foreach(StatusEffectType type in statusEffects.Keys)
+        {
+            statusEffectsUI.UpdateStatusEffectUI(type, 0);
+        }
+        statusEffects.Clear();
+        statusEffectsUI.ReSetStatusEffectUI();
+
     }
 }

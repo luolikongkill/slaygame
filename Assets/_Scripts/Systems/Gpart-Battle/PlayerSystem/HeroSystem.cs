@@ -18,6 +18,7 @@ public class HeroSystem : Singleton<HeroSystem>
     public void Setup(HeroData heroData)
     {
         HeroView.Setup(heroData);
+        HeroView.ReSetStatusEffectUI();
     }
     public void Setupv1(int health, Sprite image)
     {
@@ -25,7 +26,7 @@ public class HeroSystem : Singleton<HeroSystem>
     }
     public void Reset()
     {
-        
+        HeroSystem.Instance.HeroView.ReSetStatusEffectUI();
     }
         private void EnemyTurnPreReaction(EnemyTurnGA enemyTurnGA)
     {
@@ -43,6 +44,7 @@ public class HeroSystem : Singleton<HeroSystem>
         }
         DrawCardsGA drawCardsGA = new DrawCardsGA(5);
         ActionSystem.Instance.AddReaction(drawCardsGA);
+        EnemyPoolSystem.Instance.enemySystem.RefreshEnemyIntention();
         //敌人行动结束
     }
 }

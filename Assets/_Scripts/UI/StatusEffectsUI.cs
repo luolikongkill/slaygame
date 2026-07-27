@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,7 @@ public class StatusEffectsUI : MonoBehaviour
    [SerializeField] private StatusEffectUI statusEffectUIPrefab;
    [SerializeField] private Sprite armorSprite, burnSprite;
    private Dictionary<StatusEffectType, StatusEffectUI> statusEffectUIs = new Dictionary<StatusEffectType, StatusEffectUI>();
-   private void Start()
-   {
 
-
-   }
    public void UpdateStatusEffectUI(StatusEffectType statusEffectType, int stackCount)
    {
 
@@ -37,6 +34,16 @@ public class StatusEffectsUI : MonoBehaviour
              statusEffectUIs[statusEffectType].Set(sprite, stackCount);
 
         }
+    }
+    public void ReSetStatusEffectUI()
+    {
+        foreach(StatusEffectUI ui in statusEffectUIs.Values)
+        {
+            Destroy(ui.gameObject);
+        }
+        statusEffectUIs.Clear();
+
+
     }
 
     private Sprite GetSpriteByType(StatusEffectType statusEffectType)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManualTargetSystem : Singleton<ManualTargetSystem>
+public class ManualTargetSystem : MonoBehaviour
 {
     [SerializeField] private ArrowView arrowView;
     [SerializeField] private LayerMask targetLayerMask;
