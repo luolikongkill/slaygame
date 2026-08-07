@@ -13,5 +13,11 @@ public class CardData : ScriptableObject
    [field: SerializeReference,SR] public  Effect ManaualTargetEffect {get ; private set;} = null;
    [field: SerializeField] public  List<AutoTargetEffect> OtherEffects {get ; private set;} 
 
+   [field: SerializeReference,SR] public  CardEffect cardeffect {get ; private set;}
+
+
+   public bool HasAnthorForm;
+   [field: SerializeField] public CardData anotherform{get ; private set; }
+
 
 }

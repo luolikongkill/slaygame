@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Title>k__BackingField: Armor Up
   <Description>k__BackingField: Add 500 armor
-  <Mana>k__BackingField: 1
+  <Mana>k__BackingField: 15
   <IMage>k__BackingField: {fileID: 21300000, guid: 04a2f8b497a2dd04daff68846c61877a, type: 3}
   <ManaualTargetEffect>k__BackingField:
     rid: -2
@@ -23,11 +23,19 @@ MonoBehaviour:
       rid: 9202364331897389056
     <Effect>k__BackingField:
       rid: 9202364331897389057
+  <cardeffect>k__BackingField:
+    rid: 8872573005181747204
+  HasAnthorForm: 1
+  <anotherform>k__BackingField: {fileID: 11400000, guid: 6517a5c355bc2b24990fbbf424b8552d, type: 2}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 8872573005181747204
+      type: {class: HandleCardEffect, ns: , asm: Assembly-CSharp}
+      data:
+        handlePile: 1
     - rid: 9202364331897389056
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 

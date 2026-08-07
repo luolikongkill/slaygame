@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: group2
   m_EditorClassIdentifier: 
   eventOptions:
-  - {fileID: 11400000, guid: 88e93141727ea0845bd4b52f25cf2b8a, type: 2}
-  - {fileID: 11400000, guid: 2ac1a585c681e374f820b981704aec3e, type: 2}
+  - text: Go Away!
+    havenext: 0
+  - text: Who are you!
+    havenext: 0
   isHaveReward: 0
   optionReward:
     optionindex: 0

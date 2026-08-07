@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2801646122094219457}
   - component: {fileID: 1160905138255213639}
   - component: {fileID: 2521678122901651618}
+  - component: {fileID: 4140474396539587423}
   m_Layer: 5
   m_Name: PerkUI
   m_TagString: Untagged
@@ -89,3 +90,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1160905138255213639}
+  tooltipTrigger: {fileID: 4140474396539587423}
+--- !u!114 &4140474396539587423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731061877101351442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b9e0c5735d55f41ae2521ce977b663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: 
+  header: 

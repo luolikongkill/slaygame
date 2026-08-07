@@ -12,6 +12,7 @@ public class NodeEventManager : MonoBehaviour
 
     public TMP_Text eventtext;
     public Image backgroundimage;
+    public Image backgroundimage_;
     public string eventName;
 
 
@@ -47,6 +48,7 @@ public class NodeEventManager : MonoBehaviour
     private void InitEvent(EventData eventData)
     {
         backgroundimage.sprite = eventData.backgroundimage;
+        backgroundimage_.sprite = eventData.backgroundimage;
         eventName = eventData.eventName;
         eventtext.text = eventData.eventtext;
 

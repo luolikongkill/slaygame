@@ -1,5 +1,8 @@
+using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CardView : CardViewOfBase
 {
@@ -8,53 +11,83 @@ public class CardView : CardViewOfBase
     [SerializeField] private LayerMask dropLayer;//碰撞箱子
 
 
-    private Vector3 dragStartPositon;
     private Quaternion dragStartRotation;
 
+
+    private bool isChangeform;
+    private bool isShow;
+
+    public Vector3 OriginalPosition;
+
+    private Tween mytween = null;
 
     public void OnMouseEnter()
     {
         if(!Interactions.Instance.PlayerCanHover()) return;
         // Debug.Log("Mouse Enter");
-        wrapper.SetActive(false);
-        Vector3 pos = new (transform.position.x,-2,0);
-        CardSystem.Instance.cardViewHoverSystem.Show(Card,pos);
 
+        if( mytween == null || !isShow && !mytween.IsPlaying() )
+        {
+            isShow = true;
+            Vector3 pos = new (OriginalPosition.x,OriginalPosition.y+1,OriginalPosition.z);
+            
+            mytween = transform.DOMove(pos,0.02f).SetAutoKill(false);
+
+        }
+
+
+    }
+
+    void OnMouseOver()
+    {
+        // ⭐ 悬停期间每帧检测右键点击
+        if (Input.GetMouseButtonDown(1))
+        {
+            ChangeForm();  // 你的右键逻辑
+        }
     }
 
     public void OnMouseExit()
     {
         if(!Interactions.Instance.PlayerCanHover()) return;
         // Debug.Log("Mouse Exit");
-        CardSystem.Instance.cardViewHoverSystem.Hide();
-        wrapper.SetActive(true);
-    }
+        if(isShow )
+        {
+            isShow = false;
+            mytween = transform.DOMove(OriginalPosition,0.1f).SetAutoKill(false);
+        }
+        
 
+    }
+    
 
     void OnMouseDown()
     {
+        
         if(!Interactions.Instance.PlayerCanInteract()) return;
         // Debug.Log("Mouse Down");
         if(Card.ManualTargetEffect != null)
         {
-            OnMouseExit();
+
             Interactions.Instance.PlayerIsDragging = true;
             CardSystem.Instance.manualTargetSystem.StartTargeting(transform.position);
             
         }
-        else{
-        Interactions.Instance.PlayerIsDragging = true;
-        wrapper.SetActive(true);
-        CardSystem.Instance.cardViewHoverSystem.Hide();
-        dragStartPositon = transform.position;
-        dragStartRotation = transform.rotation;
-        transform.rotation = Quaternion.Euler(0,0,0);
-        transform.position = MouseUtil.GetMousePositionInWorldSpace(-1);
+
+        else
+        {
+            Interactions.Instance.PlayerIsDragging = true;
+            // wrapper.SetActive(true);
+            // CardSystem.Instance.cardViewHoverSystem.Hide();
+            dragStartRotation = transform.rotation;
+            transform.rotation = Quaternion.Euler(0,0,0);
+            transform.position = MouseUtil.GetMousePositionInWorldSpace(-1);
         }
         OnMouseEnter();
 
     }
     private bool hasloggedDrag = false;
+    private bool IsPlaying = false;
 
     void OnMouseDrag()
     {
@@ -82,6 +115,7 @@ public class CardView : CardViewOfBase
                 PlayCardGA playCardGA = new PlayCardGA(Card,target);
                 ActionSystem.Instance.Perform(playCardGA);
                 Debug.Log("Played card with manual target: " + Card.Title);
+                IsPlaying = true;
             }
             else
             {
@@ -104,18 +138,43 @@ public class CardView : CardViewOfBase
                 PlayCardGA playCardGA = new PlayCardGA(Card);
                 ActionSystem.Instance.Perform(playCardGA);
                 Debug.Log("Played card: " + Card.Title);
+                IsPlaying = true;
             }
             else
             {
                 Debug.Log("no enough mana or invalid drop position");
-                transform.position = dragStartPositon;
+                transform.position = OriginalPosition;
                 transform.rotation = dragStartRotation;
             }
 
         }
          Interactions.Instance.PlayerIsDragging = false;
+
+         if(!IsPlaying)
          OnMouseExit();
     }
 
+
+
+
+    public void ChangeForm()
+    {
+        if(Card.canchangeform)
+        {
+            Debug.Log("has 1");
+            if(!isChangeform)
+            {
+                Cardbg.DOFade(1f,0.2f);
+                isChangeform = true;
+            }
+            else
+            {
+                Cardbg.DOFade(0f,0.2f);
+                isChangeform = false;
+            }
+            Card.CardChangeForm();
+            Setup(Card);
+        }
+    }
 
 }

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: group1
   m_EditorClassIdentifier: 
   eventOptions:
-  - {fileID: 11400000, guid: a3941fbd28ae81a45a2be67360c547da, type: 2}
-  - {fileID: 11400000, guid: e34176743b5783844b96d6a159d4f4db, type: 2}
+  - text: Hello!
+    havenext: 0
+  - text: Nice to meet you!
+    havenext: 0
   isHaveReward: 0
   optionReward:
     optionindex: 0

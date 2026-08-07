@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f22b8f308593b4b8e4a17083b823aa, type: 3}
   m_Name: Sliverwoof
   m_EditorClassIdentifier: 
+  <EnemyName>k__BackingField: SliverWoof999
   <Image>k__BackingField: {fileID: 21300000, guid: 1bc6ef8719ba99f4494466907af0801c, type: 3}
   <Health>k__BackingField: 9999
   <AttackPower>k__BackingField: 999
@@ -23,3 +24,4 @@ MonoBehaviour:
     count: 999
     target: {fileID: 0}
   enemyType: 3
+  animController: {fileID: 0}

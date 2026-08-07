@@ -20,8 +20,9 @@ public class BagManager : Singleton<BagManager>
 
     void Start()
     {
-        BagExitButton.onClick.AddListener(ButtonBag);
         anim = GetComponent<Animator>();
+        BagExitButton.onClick.AddListener(ButtonBag);
+        
     }
     public void Init(List<CardData> Deck)
     {

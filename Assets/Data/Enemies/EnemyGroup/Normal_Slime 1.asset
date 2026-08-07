@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5522e7dbfb304244a178f7e99b42f43, type: 3}
+  m_Name: Normal_Slime 1
+  m_EditorClassIdentifier: 
+  enemydatas:
+  - {fileID: 11400000, guid: 22708d1741e37c345ac3d163f536aea5, type: 2}
+  - {fileID: 11400000, guid: 6f889d4a73693254c91598ebad6f9e70, type: 2}
+  - {fileID: 11400000, guid: 6f889d4a73693254c91598ebad6f9e70, type: 2}
+  offsets:
+  - {x: 0, y: 0, z: 0}
+  - {x: -4, y: -1, z: 0}
+  - {x: -4, y: 3, z: 0}
+  localscales:
+  - {x: 1, y: 1, z: 1}
+  - {x: 0.7, y: 0.7, z: 0.7}
+  - {x: 0.6, y: 0.6, z: 0.6}

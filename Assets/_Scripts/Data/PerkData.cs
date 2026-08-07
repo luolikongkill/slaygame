@@ -10,4 +10,7 @@ public class PerkData : ScriptableObject
     [field: SerializeField] public  List<AutoTargetEffect> AutoTargetEffects {get ; private set;} 
     [field: SerializeField] public bool UseAutoTarget { get; private set; } = true;
     [field: SerializeField] public bool UseActionCasterAsTarget { get; private set; } = false;
+
+    public string Name;
+    [TextArea(3,5)]public string Des;
 }

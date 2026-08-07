@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c16314d1323edd499828aa62b12e5aa, type: 3}
+  m_Name: Beta
+  m_EditorClassIdentifier: 
+  HeroName: Beta
+  herodata: {fileID: 11400000, guid: 1807f2cd844eb37418338a60c4dae13f, type: 2}
+  max_image: {fileID: -227605748, guid: ed61358804a12f542be569fad7f95ef7, type: 3}
+  regular_image: {fileID: -582997315, guid: ba8063df648db474c9154e32a765275b, type: 3}
+  Camp: {fileID: 21300000, guid: d0ac77016e718964faa74295fc06a580, type: 3}
+  core: {fileID: 0}
+  coreType: 0

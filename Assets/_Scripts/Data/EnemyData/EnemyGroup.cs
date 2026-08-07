@@ -8,4 +8,7 @@ public class EnemyGroup : ScriptableObject
 {
 
     public List<EnemyData> enemydatas;
+
+    public Vector3[] offsets;
+    public Vector3[] localscales;
 }

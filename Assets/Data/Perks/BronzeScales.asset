@@ -22,6 +22,8 @@ MonoBehaviour:
       rid: 9202364314017857549
   <UseAutoTarget>k__BackingField: 0
   <UseActionCasterAsTarget>k__BackingField: 1
+  Name: BronzeScales
+  Des: When you are attacked, deal 30 damage to the attacker
   references:
     version: 2
     RefIds:
@@ -32,7 +34,7 @@ MonoBehaviour:
     - rid: 9202364314017857549
       type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        damageAmount: 3
+        damageAmount: 30
     - rid: 9202364314017857554
       type: {class: NoTM, ns: , asm: Assembly-CSharp}
       data: 

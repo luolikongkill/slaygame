@@ -6,16 +6,14 @@ using TMPro;
 public class ManaUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text mana;
-    public void UpdateManaText(int currentMana)    
+    [SerializeField] private TMP_Text overmana;
+    public void UpdateManaText(int currentMana,int OverMana)    
     {
         mana.text = currentMana.ToString();
-        Debug.Log("Mana UI Updated: " + currentMana);
+        overmana.text = OverMana.ToString();
+        Debug.Log("Mana UI Updated: " + currentMana + "\n OverMana Updated" + OverMana);
     }
-    // void Awake()
-    // {
-    //     UpdateManaText(3);
-    //     Debug.Log("Mana UI Awake called");
-    // }
+
 
 
 }

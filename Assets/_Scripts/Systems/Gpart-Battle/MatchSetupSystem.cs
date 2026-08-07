@@ -7,11 +7,17 @@ using UnityEngine;
 //本来是地图连接战斗系统，后面直接使用地图click事件触发战斗，所以这个系统就变成了战斗初始化系统
 public class MatchSetupSystem : Singleton<MatchSetupSystem>
 {
-    [SerializeField] public HeroData heroData;
+    public HeroData heroData;
     public   HeroData  CurrentHeroData ;
     public bool isGameStarted = false;
     public bool isPlayerDied = false;
 
+
+    public void Setup(HeroData heroData)
+    {
+        this.heroData = heroData;
+        ReGame();
+    }
     public void GameStart(RoomType roomType)
     {
         if(!isGameStarted)
@@ -52,6 +58,8 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
     //游戏角色更新
     private void GameAfterInit()
     {
+        VFXManager.ClearUPVFX();
+
         Interactions.Instance.GameIsOver = false;
         CurrentHeroData.BattleDeck = CurrentHeroData.Deck;
         Debug.Log("战斗卡牌添加完成");

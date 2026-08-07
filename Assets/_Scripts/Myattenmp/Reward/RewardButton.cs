@@ -13,12 +13,12 @@ public class RewardButton : MonoBehaviour
     {
         if(str == "card")
         {
-            RewardType.text = "RewardCard";
+            RewardType.text = "Card";
             curimage.sprite = image[0];
         }
         else if(str == "perk")
         {
-            RewardType.text = "RewardPerk";
+            RewardType.text = "Perk";
             curimage.sprite = image[1];
         }
         else

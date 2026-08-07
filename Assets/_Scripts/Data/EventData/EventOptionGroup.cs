@@ -18,5 +18,13 @@ public class OptionReward
     public int optionindex;
     public string rewardtype;
 }
+[System.Serializable]
+public class EventOption 
+{
+    [TextArea(3,5)] public string text;
+    public bool havenext;
+
+
+}
 
 

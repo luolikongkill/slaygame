@@ -8,11 +8,12 @@ using UnityEngine;
 public class CombatantView : MonoBehaviour
 {
     [SerializeField] public TMP_Text healthText;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] public SpriteRenderer spriteRenderer;
     [SerializeField] private StatusEffectsUI statusEffectsUI;
+    [SerializeField] public SingleEffectSystem singleEffectSystem ;
 
-    public int MaxHealth { get; private set; }
-    public int CurHealth { get; private set; }
+    public int MaxHealth { get; set; }
+    public int CurHealth { get; set; }
     private Dictionary<StatusEffectType, int> statusEffects = new Dictionary<StatusEffectType, int>();
 
 
@@ -28,9 +29,11 @@ public class CombatantView : MonoBehaviour
         healthText.text = "HP:"+ CurHealth;
     }
 
-    public void Damage(int damageAmount)
+    public virtual void Damage(int damageAmount)
     {
-        int reaminingDamage = damageAmount;
+        damageAmount = singleEffectSystem.DamageSet(damageAmount);
+
+        int reaminingDamage = damageAmount;        
         int currentArmor = GetStatusEffectStacks(StatusEffectType.ARMOR);
         if (currentArmor > 0)
         {
@@ -51,12 +54,30 @@ public class CombatantView : MonoBehaviour
             if (CurHealth < 0) 
             {
                 CurHealth = 0;
+
             }
         }
         
         UpdateHealthText();
         if(CurHealth>0)transform.DOShakePosition(0.5f, 0.5f);
     }
+    public virtual void EffectDamage(int damageAmount)
+    {
+        int reaminingDamage = damageAmount;
+        if(reaminingDamage > 0)
+        {
+            CurHealth -= reaminingDamage;
+            if (CurHealth < 0) 
+            {
+                CurHealth = 0;
+            }
+        }
+        Debug.Log("effectDamage" + damageAmount);
+        UpdateHealthText();
+        if(CurHealth>0)transform.DOShakePosition(0.5f, 0.5f);
+    }
+
+    //状态栏<summary>
      public void UpdateStatusEffect(StatusEffectType statusEffectType, int stackCount)
     {
         if (stackCount == 0)
@@ -92,6 +113,7 @@ public class CombatantView : MonoBehaviour
         }
         else
         {
+            singleEffectSystem.AddChanes(type);
             statusEffects.Add(type, stackCount);
         }
 
@@ -105,6 +127,7 @@ public class CombatantView : MonoBehaviour
             if (statusEffects[type] <= 0)
             {
                 statusEffects.Remove(type);
+                singleEffectSystem.RemoveChanes(type);
                 
             }
             statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
@@ -127,5 +150,10 @@ public class CombatantView : MonoBehaviour
         statusEffects.Clear();
         statusEffectsUI.ReSetStatusEffectUI();
 
+    }
+
+    public virtual void animChange(EnemyState state)
+    {
+        return;
     }
 }

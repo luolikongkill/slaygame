@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Water, UI, DropArea, EnemyView, CardView
 - Active game object:
-  - Name: StatusEffectsUI
+  - Name: RewardCanvas
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

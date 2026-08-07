@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemydatas:
   - {fileID: 11400000, guid: 324411e06c4a8e14e8506fdcdc0b87db, type: 2}
+  offsets:
+  - {x: 0, y: 0, z: 0}
+  localscales:
+  - {x: 1, y: 1, z: 1}

@@ -20,10 +20,7 @@ public class HeroSystem : Singleton<HeroSystem>
         HeroView.Setup(heroData);
         HeroView.ReSetStatusEffectUI();
     }
-    public void Setupv1(int health, Sprite image)
-    {
-        HeroView.Setupv1(health, image);
-    }
+
     public void Reset()
     {
         HeroSystem.Instance.HeroView.ReSetStatusEffectUI();
@@ -46,5 +43,5 @@ public class HeroSystem : Singleton<HeroSystem>
         ActionSystem.Instance.AddReaction(drawCardsGA);
         EnemyPoolSystem.Instance.enemySystem.RefreshEnemyIntention();
         //敌人行动结束
-    }
+    }//添加回合反应
 }

@@ -16,7 +16,9 @@ public class CardSystem : Singleton<CardSystem>
    [SerializeField] public TMP_Text DiscardText;
    private readonly List<Card> drawPile= new ();
    private readonly List<Card> discardPile= new ();
-   private readonly List<Card> hand= new ();
+   public readonly List<Card> hand= new ();
+   
+    [SerializeField]private CardPileView cardpileview;
 
 
    [SerializeField] private CardViewCreator cardViewCreator;
@@ -28,6 +30,7 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
+        ActionSystem.AttachPerformer<HandleCardGA>(HandleCardPerformer);
 
     }
     void OnDisable()
@@ -35,6 +38,7 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
         ActionSystem.DetachPerformer<PlayCardGA>();
+        ActionSystem.DetachPerformer<HandleCardGA>();
 
 
         }
@@ -50,6 +54,7 @@ private void CardTextUpdate()
             Card card = new (cardData);
             drawPile.Add(card);
         }
+        cardpileview.Setup(drawPile,discardPile);
     }
     public void Reset()
     {
@@ -63,7 +68,8 @@ private void CardTextUpdate()
     {
         int actualAmount = Mathf.Min(drawCardsGA.Amount, drawPile.Count);
         int notDrwanAmount = drawCardsGA.Amount - actualAmount;
-        for (int i = 0; i < actualAmount; i++)        {
+        for (int i = 0; i < actualAmount; i++)        
+        {
             yield return DrawCard();
         }
         if(notDrwanAmount > 0)
@@ -82,13 +88,18 @@ private void CardTextUpdate()
 
     foreach (var card in currentHand)
     {
+        if(card == null)
+            {
+                Debug.LogWarning("nullcard in hand");
+                break;
+            }
         discardPile.Add(card);
         CardTextUpdate();
         CardView cardView = handView.RemoveCard(card);
         Debug.Log("获取到的 cardView: " + (cardView != null ? cardView.name : "空！"));
         
         // 关键：加日志确认是否进入 DiscardCard
-        yield return DiscardCard(cardView);
+        yield return DisPileAdd(cardView);
         Debug.Log("DiscardCard 执行完毕！" + currentHand.Count);
     }
     
@@ -100,9 +111,9 @@ private void CardTextUpdate()
     private IEnumerator PlayCardPerformer(PlayCardGA playCardGA)
     {
         Card card = playCardGA.Card;
-        hand.Remove(card);
-        CardView cardView = handView.RemoveCard(card);
-        yield return DiscardCard(cardView);
+        // hand.Remove(card);
+        // CardView cardView = handView.RemoveCard(card);
+        // yield return DiscardCard(cardView);
 
         SpendManaGA spendManaGA = new SpendManaGA(card.Mana);
         ActionSystem.Instance.AddReaction(spendManaGA);
@@ -114,7 +125,7 @@ private void CardTextUpdate()
             ActionSystem.Instance.AddReaction(performEffectGA);
         }
 
-        discardPile.Add(card);
+        // discardPile.Add(card);
         CardTextUpdate();
         foreach (var effectWrapper in playCardGA.Card.OtherEffects)
         {
@@ -122,8 +133,45 @@ private void CardTextUpdate()
             PerformEffectGA performEffectGA = new (effectWrapper.Effect, targets);
             ActionSystem.Instance.AddReaction(performEffectGA);
         }
+
+        ActionSystem.Instance.AddReaction(card.cardEffect.GetGameAction(card));
+
+
+        yield return null;
         //执行卡牌效果
         //Player.Instance.DiscardCard(this);
+    }
+    private IEnumerator HandleCardPerformer(HandleCardGA handleCardGA)
+    {
+
+        switch(handleCardGA.pile)
+        {
+            case CardPile.DisCardPile:
+                hand.Remove(handleCardGA.card);
+                discardPile.Add(handleCardGA.card);
+                CardView cardView = handView.RemoveCard(handleCardGA.card);
+                yield return DisPileAdd(cardView);
+                break;
+            case CardPile.DrawPile:
+                hand.Remove(handleCardGA.card);
+                drawPile.Add(handleCardGA.card);
+                CardView cardView1 = handView.RemoveCard(handleCardGA.card);
+                yield return DrawPileAdd(cardView1);
+                break;
+            case CardPile.HandPile:
+                break;
+
+            case CardPile.Another:
+                hand.Remove(handleCardGA.card);
+                CardView cardView2 = handView.RemoveCard(handleCardGA.card);
+                yield return ExhaustCard(cardView2);
+                break;
+
+            default :
+                break;
+        }
+        CardTextUpdate();
+        yield return null;
     }
 
 
@@ -150,7 +198,7 @@ private void CardTextUpdate()
         CardTextUpdate();
         Debug.Log("牌堆已重新洗牌");
     }
-    private IEnumerator DiscardCard(CardView cardView)
+    private IEnumerator DisPileAdd(CardView cardView)
     {
         // SceneManager.MoveGameObjectToScene(cardView.gameObject, SceneManager.GetActiveScene());
         cardView.transform.DOScale(Vector3.zero, 0.15f);
@@ -160,12 +208,25 @@ private void CardTextUpdate()
         Destroy(cardView.gameObject);
         // Debug.Log("丢弃一张牌2");
     }
-    private IEnumerator DestroyCard(CardView cardView)
+    private IEnumerator ExhaustCard(CardView cardView)
     {
+        Tween tween = cardView.transform.DOScale(Vector3.zero, 0.15f);
+
+        yield return tween.WaitForCompletion();
         Destroy(cardView.gameObject);
-        Debug.Log("销毁一张牌视图");
-        yield break;
+        // Debug.Log("丢弃一张牌2");
     }
+    private IEnumerator DrawPileAdd(CardView cardView)
+    {
+        cardView.transform.DOScale(Vector3.zero, 0.15f);
+
+        Tween tween = cardView.transform.DOMove(drawPilePoint.position, 0.15f);
+        yield return tween.WaitForCompletion();
+        Destroy(cardView.gameObject);
+        // Debug.Log("丢弃一张牌2");
+    }
+
+
     private void DestroyCard(List<CardView> cardViews)
     {
         foreach (var cardView in cardViews)
@@ -175,4 +236,15 @@ private void CardTextUpdate()
         cardViews.Clear();
         Debug.Log("销毁所有卡牌视图");
     }
+}
+
+
+public enum CardPile
+{
+    DrawPile,
+    DisCardPile,
+    HandPile,
+    Another
+
+
 }

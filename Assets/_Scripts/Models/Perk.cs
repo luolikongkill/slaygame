@@ -5,14 +5,20 @@ using SerializeReferenceEditor;
 public class Perk 
 {
     public Sprite Image => data.Image;
+    public string perkName => data.Name;
+    public string perkDes => data.Des;
+    
     private readonly PerkData data;
     private readonly PerkCondition condition;
     private readonly AutoTargetEffect effect;
+    
+
     public Perk(PerkData perkdata)
     {
         this.data = perkdata;
         condition = data.Condition;
         effect = data.AutoTargetEffects[0];
+
     }
     public void OnAdd()
     {

@@ -5,11 +5,16 @@ using UnityEngine.UI;
 public class GetRewardUI : Singleton<GetRewardUI>
 {
     public RewardViewCreator rewardViewCreator;
-    [SerializeField] private GameObject rewardPanel;
+
+
     public GameObject rewardbox;
 
+    [SerializeField] private CanvasGroup canvas;
+
     public Button SkipButton;
-    public Button[] rewardButton;
+    private List<Button> rewardButton = new();
+
+    public Button RCPrefab;
 
 
     public void Init(List<CardData> CardDatas)
@@ -19,7 +24,10 @@ public class GetRewardUI : Singleton<GetRewardUI>
         foreach(Button button in rewardButton)
         {
             button.onClick.RemoveAllListeners();
+
+            Destroy(button);
         }
+        rewardButton.Clear();
     }
 
     void Start()
@@ -32,28 +40,39 @@ public class GetRewardUI : Singleton<GetRewardUI>
         RewardCount rewardCount = new ();
         rewardCount.Init(rewardType);
 
-        foreach (var button in rewardButton)
+        foreach(Button button in rewardButton)
         {
-            button.gameObject.SetActive(false);
+            button.onClick.RemoveAllListeners();
+
+            Destroy(button);
         }
+        rewardButton.Clear();
+
+
         for (int i = 0; i < rewardCount.Rcardcount; i++)
         {
-            var option = rewardButton[i];
-            
-            option.gameObject.SetActive(true);
-            option.GetComponent<RewardButton>().init("card");
 
-            option.onClick.AddListener(()=>{ ShowCardReward();option.Select();option.gameObject.SetActive(false) ;CloseRewardbox();});
+
+            Button button = Instantiate(RCPrefab,rewardbox.transform);
+            button.GetComponent<RewardButton>().init("card");
+
+            rewardButton.Add(button);
+
+
+            button.onClick.AddListener(()=>{ ShowCardReward();button.Select();button.gameObject.SetActive(false) ;CloseRewardbox();});
         }
+
+
         for (int i = 0; i < rewardCount.Rperkcount; i++)
         {
             int j = rewardCount.Rcardcount;
-            var option = rewardButton[j];
-            
-            option.gameObject.SetActive(true);
-            option.GetComponent<RewardButton>().init("perk");
 
-            option.onClick.AddListener(()=>{ GetPerkReward();option.Select();option.gameObject.SetActive(false) ;});
+            Button button = Instantiate(RCPrefab,rewardbox.transform);
+            button.GetComponent<RewardButton>().init("perk");
+
+            rewardButton.Add(button);
+
+            button.onClick.AddListener(()=>{ GetPerkReward();button.Select();button.gameObject.SetActive(false) ;});
             j++;
         }
         OpenUI();
@@ -86,7 +105,10 @@ public class GetRewardUI : Singleton<GetRewardUI>
 
     public void CloseUI()
     {
-        rewardPanel.SetActive(false);
+        canvas.alpha = 0;
+        canvas.blocksRaycasts = false;
+        canvas.interactable = false;
+
     }
     public void CloseRewardbox()
     {
@@ -94,7 +116,10 @@ public class GetRewardUI : Singleton<GetRewardUI>
     }
     public void OpenUI()
     {
-        rewardPanel.SetActive(true);
+        canvas.alpha = 1;
+        canvas.blocksRaycasts = true;
+        canvas.interactable = true;
+
         rewardbox.SetActive(true);
     }
 

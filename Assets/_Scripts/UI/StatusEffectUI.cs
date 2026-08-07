@@ -8,10 +8,15 @@ public class StatusEffectUI : MonoBehaviour
 {
     [SerializeField] private Image image;
     [SerializeField] private TMP_Text stackCountText;
-    public void Set(Sprite sprite, int stackCount)
+    private StatusEffectType type;
+    [SerializeField]private TooltipTrigger tooltipTrigger;
+    public void Set(Sprite sprite, StatusEffectType effecttype,int stackCount)
     {
         image.sprite = sprite;
         stackCountText.text = stackCount.ToString();
+        type = effecttype;
+
+        tooltipTrigger.Setup(type.GetDescription(),type.ToString()+stackCount.ToString());
     }
 
 }

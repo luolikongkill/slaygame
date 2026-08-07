@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class DealDamageEffect : Effect
 {
-    [SerializeField] private int damageAmount;
+    [SerializeField] public int damageAmount;
     public override  GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
     {
+        damageAmount = HeroSystem.Instance.HeroView.singleEffectSystem.AttackSet(damageAmount);
+
         DealDamageGA dealDamageGA = new DealDamageGA(damageAmount, targets, caster);
         Debug.Log("DealDamageEffect triggered, creating DealDamageGA with amount: " + damageAmount);
+        return dealDamageGA;
+    }
+}
+
+public class DealEDamageEffect : Effect
+{
+    [SerializeField] public int damageAmount;
+    public override  GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
+    {
+
+        DealDamageGA dealDamageGA = new DealDamageGA(damageAmount, targets, caster);
+        Debug.Log("DealDamageEffect triggered, creating EDealDamageGA with amount: " + damageAmount);
         return dealDamageGA;
     }
 }

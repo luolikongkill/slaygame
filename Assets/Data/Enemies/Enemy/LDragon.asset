@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f22b8f308593b4b8e4a17083b823aa, type: 3}
+  m_Name: LDragon
+  m_EditorClassIdentifier: 
+  <EnemyName>k__BackingField: EvilDrgon
+  <Image>k__BackingField: {fileID: -677333817, guid: cc4566b41b041794e92ffafb74130ab8, type: 3}
+  <Health>k__BackingField: 99999
+  <AttackPower>k__BackingField: 9999
+  enemyActions:
+  - type: 0
+    count: 999
+    target: {fileID: 0}
+  enemyType: 3
+  animController: {fileID: 0}

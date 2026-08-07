@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: bless
   m_EditorClassIdentifier: 
   eventOptions:
-  - {fileID: 11400000, guid: e321ab3941992784d9956dc87bff961a, type: 2}
+  - text: Rieceve blessing
+    havenext: 0
   isHaveReward: 0
   optionReward:
     optionindex: 0

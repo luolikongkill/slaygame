@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f22b8f308593b4b8e4a17083b823aa, type: 3}
   m_Name: Green Slime
   m_EditorClassIdentifier: 
+  <EnemyName>k__BackingField: Green Slime
   <Image>k__BackingField: {fileID: 21300000, guid: 49ede3dd18da4bd40812cedffeb350e2, type: 3}
   <Health>k__BackingField: 200
   <AttackPower>k__BackingField: 40
@@ -23,3 +24,4 @@ MonoBehaviour:
     count: 80
     target: {fileID: 0}
   enemyType: 1
+  animController: {fileID: 0}

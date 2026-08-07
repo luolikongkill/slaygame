@@ -9,40 +9,46 @@ public class StartView : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button settingsButton;
+
     [SerializeField] private GameObject startUIPanel; // 拖你的StartUI面板
-    [SerializeField] private GameObject mapUIPanel;   // 拖你的MapUI面板
-    [SerializeField] private MapView mapView;         // 拖你的MapUI物体
+    [SerializeField] private GameObject mapUIPanel;
+    
+    
+       // 拖你的MapUI面板
+    [SerializeField] private MapView mapView;  
+    [SerializeField] private SelectSystem selectsystem;       // 拖你的MapUI物体
+
+
+    [SerializeField] private GameObject CharSelectPanel;
 
     private void Awake()
     {
-        startButton.onClick.AddListener(OnStartGame);
+        startButton.onClick.AddListener(ToSelectCharacter);
         continueButton.onClick.AddListener(OnContinueGame);
         settingsButton.onClick.AddListener(OnOpenSettings);
+        
     }
 
-    private void OnStartGame()
+    void Start()
     {
-        // 1. 初始化玩家数据
-        MatchSetupSystem.Instance.ReGame();
+        // CharSelectPanel.SetActive(false);
+    }
 
-        // 2. 生成地图
-        MapManager.Instance.GenerateFullMap();
-        if (MapManager.Instance != null)
+    void Update()
+    {
+        if(Input.GetButtonDown("test"))
         {
-            Debug.Log("地图生成完成，准备进入地图场景");
+            MatchSetupSystem.Instance.ReGame();
+            EnemyPoolSystem.Instance.Setup(RoomType.Boss);
+            UIChangeSet.Instance.UIChange(2);
         }
-        else
-        {
-            Debug.LogError("错误：地图生成失败！");
-        }
-        // 场景一加载完，就自动显示地图
-        if (mapView != null)
-        {
-            mapView.ShowMap();
-        }
+    }
 
-        UIChangeSet.Instance.UIChange(1);
 
+
+    private void ToSelectCharacter()
+    {
+        CharSelectPanel.SetActive(true);
     }
     
 
